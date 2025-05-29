@@ -1,6 +1,6 @@
 /*
 -----------------------------------------------
-Modernized Blogger Template Style (v2)
+Modernized Blogger Template Style (v3)
 Based on: Rounders
 Date:     May 2025
 ----------------------------------------------- */
@@ -61,6 +61,7 @@ a img {
 }
 
 /* Sidebar is removed, so no styles needed for #sidebar, #profile-container, .box */
+/* Removed all sidebar-related CSS rules */
 
 #secondary-footer {
   grid-column: 1 / -1; /* Spans full width */
@@ -145,18 +146,49 @@ a img {
   transform: translateY(-5px); /* Lift effect on hover */
 }
 
-/* Hide post-body and post-footer on main page for card view */
-body:not(.item-page) .post .post-body,
-body:not(.item-page) .post .post-footer {
-  display: none;
-}
+/* No longer need to hide post-body/footer with CSS on main page, as they are conditionally rendered in HTML */
+/* body:not(.item-page) .post .post-body, */
+/* body:not(.item-page) .post .post-footer { */
+/* display: none; */
+/* } */
 
-/* Show post-body and post-footer on single post page */
-body.item-page .post .post-body,
-body.item-page .post .post-footer {
-  display: block; /* Or flex, depending on content */
+/* Ensure post-body and post-footer are styled when they ARE rendered (on item page) */
+.post-body {
+  padding: 0 15px 15px; /* Add internal padding */
+  border-top: 1px dotted #eee; /* Separator for body */
+  margin-top: 15px;
 }
-
+.post p {
+  margin: 0 0 1em; /* Increased paragraph margin */
+}
+p.post-footer {
+  background: #f8f8f8; /* Lighter background for footer */
+  margin: 0;
+  padding: 10px 15px; /* Adjusted padding */
+  border: none; /* Remove dotted borders */
+  font-size: 0.9rem;
+  line-height: 1.5em;
+  color: #666;
+  display: flex; /* Use flexbox for alignment */
+  justify-content: space-between; /* Space out items */
+  align-items: center; /* Vertically center items */
+  border-top: 1px solid #ddd; /* Separator for footer */
+}
+p.post-footer em {
+  display: block;
+  font-style: normal;
+  order: -1; /* Puts the date/author first in flex order */
+}
+a.comment-link {
+  background: none; /* Remove image background */
+  padding-left: 0; /* Reset padding */
+  position: relative;
+  margin-left: 15px; /* Space from other elements */
+}
+a.comment-link::before { /* Modern way to add comment icon */
+  content: '💬'; /* Emoji comment icon */
+  margin-right: 5px;
+}
 
 .post-card-content {
   display: flex;
@@ -219,43 +251,6 @@ a.title-link:hover {
 }
 .post-date a:hover {
   color: #c63;
-}
-
-.post-body {
-  padding: 0 15px 15px; /* Add internal padding */
-  border-top: 1px dotted #eee; /* Separator for body */
-  margin-top: 15px;
-}
-.post p {
-  margin: 0 0 1em; /* Increased paragraph margin */
-}
-p.post-footer {
-  background: #f8f8f8; /* Lighter background for footer */
-  margin: 0;
-  padding: 10px 15px; /* Adjusted padding */
-  border: none; /* Remove dotted borders */
-  font-size: 0.9rem;
-  line-height: 1.5em;
-  color: #666;
-  display: flex; /* Use flexbox for alignment */
-  justify-content: space-between; /* Space out items */
-  align-items: center; /* Vertically center items */
-  border-top: 1px solid #ddd; /* Separator for footer */
-}
-p.post-footer em {
-  display: block;
-  font-style: normal;
-  order: -1; /* Puts the date/author first in flex order */
-}
-a.comment-link {
-  background: none; /* Remove image background */
-  padding-left: 0; /* Reset padding */
-  position: relative;
-  margin-left: 15px; /* Space from other elements */
-}
-a.comment-link::before { /* Modern way to add comment icon */
-  content: '💬'; /* Emoji comment icon */
-  margin-right: 5px;
 }
 
 /* All Posts Grid Layout */
@@ -462,7 +457,7 @@ a.comment-link::before { /* Modern way to add comment icon */
   border-left: 3px solid #eee; /* Add a subtle left border */
 }
 .comment-body p {
-  margin: 0 0 0.5em;
+  margin: 0 0 .5em;
 }
 .comment-timestamp {
   margin: 0 0 1em;
