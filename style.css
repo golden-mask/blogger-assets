@@ -1,6 +1,6 @@
 /*
 -----------------------------------------------
-Modernized Blogger Template Style (v3)
+Modernized Blogger Template Style (v4 - Revamped)
 Based on: Rounders
 Date:     May 2025
 ----------------------------------------------- */
@@ -36,12 +36,11 @@ a img {
 /* Page Structure (CSS Grid Layout) */
 #content {
   display: grid;
-  /* Now only one column for main content, as sidebar is removed */
-  grid-template-columns: 1fr;
+  grid-template-columns: 1fr; /* Single column layout */
   grid-template-rows: auto auto auto auto; /* Header, Main, Secondary Footer, Footer */
   gap: 25px; /* Space between grid items */
   width: 95%; /* Fluid width */
-  max-width: 1000px; /* Increased max width for the blog */
+  max-width: 1000px; /* Increased max width for the blog content */
   margin: 0 auto; /* Center the content */
   text-align: left;
   padding: 0; /* Remove any default padding that might interfere with grid */
@@ -146,11 +145,16 @@ a img {
   transform: translateY(-5px); /* Lift effect on hover */
 }
 
-/* No longer need to hide post-body/footer with CSS on main page, as they are conditionally rendered in HTML */
-/* body:not(.item-page) .post .post-body, */
-/* body:not(.item-page) .post .post-footer { */
-/* display: none; */
-/* } */
+/* Post body and footer visibility based on page type */
+body:not(.item-page) .post .post-body,
+body:not(.item-page) .post .post-footer {
+  display: none; /* Hide on index/archive pages */
+}
+
+body.item-page .post .post-body,
+body.item-page .post .post-footer {
+  display: block; /* Show on single post (item) pages */
+}
 
 /* Ensure post-body and post-footer are styled when they ARE rendered (on item page) */
 .post-body {
@@ -557,12 +561,25 @@ a.title-link:hover {
   margin-top: 20px;
 }
 
+/* Cool Feature: Scroll-triggered Fade-in Animation */
+.fade-in-on-scroll {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.fade-in-on-scroll.fade-in-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
 /* Responsive Design (Media Queries) */
 
 /* For screens smaller than 992px (typical tablet landscape) */
 @media (max-width: 991px) {
   #content {
-    grid-template-columns: 1fr; /* Stack main and sidebar */
+    grid-template-columns: 1fr; /* Single column layout */
     gap: 20px; /* Slightly reduced gap */
     width: 90%;
     max-width: 800px; /* Adjust max width for smaller desktops/large tablets */
