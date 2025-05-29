@@ -4,7 +4,7 @@ This repository stores the custom HTML, CSS, and JavaScript files used to modern
 Project Overview
 This project aims to transform a traditional Blogger template into a more contemporary and functional blog layout. Key modernization efforts include:
 
-Semantic HTML5 Structure: Replacing outdated div heavy layouts with modern HTML5 semantic tags (<header>, <main>, <aside>, <footer>, <article>, <section>).
+Semantic HTML5 Structure: Replacing outdated div heavy layouts with modern HTML5 semantic tags (<header>, <main>, <footer>, <article>, <section>).
 
 CSS Grid & Flexbox Layouts: Migrating from float-based layouts to a responsive CSS Grid for the main page structure and Flexbox for internal component arrangements.
 
@@ -17,6 +17,14 @@ Feature Integration: Adding new sections and functionalities not present in the 
 Current Features & Sections
 The blog template now includes the following key sections and features:
 
+Centralized & Wider Layout:
+
+The entire blog content is now centered on the page.
+
+The overall blog width has been increased for a more expansive feel.
+
+The design is fully mobile-friendly, adapting gracefully to smaller screens.
+
 Latest Posts Section (Carousel):
 
 Displays the 3 latest blog posts in a dynamic, image-driven carousel.
@@ -27,13 +35,15 @@ Clicking on an image or title opens the full post on a new page.
 
 Implemented using custom CSS and JavaScript.
 
-Full List of Blog Posts Section:
+All Blog Posts Section (Card Grid):
 
-Shows all blog posts in a traditional list format.
+Shows all blog posts in a visually appealing three-column card style on wider screens.
 
-Each entry includes the post image, title, and publish date.
+Each card prominently displays the post image, title, and publish date.
 
-Supports Blogger's built-in pagination for navigation.
+Post images are now correctly displayed, pulling from the Blogger post's first image or using a fallback.
+
+Supports Blogger's built-in pagination at the end of the section for navigating older posts.
 
 Secondary Footer (Social Links & Tags):
 
@@ -42,6 +52,11 @@ A new, dedicated footer section for important site links.
 Includes a "Follow Us" section for social media links.
 
 Features a "Tags" section to categorize content.
+
+Key Structural Changes
+Sidebar Removed: The traditional sidebar has been completely removed to provide a cleaner, full-width main content area.
+
+Blogger Navigation Removed: Any default Blogger navigation bar elements have been removed from the template's HTML to streamline the design.
 
 Repository Contents
 style.css: The main stylesheet containing all the custom CSS rules for the modernized Blogger template. This file dictates the visual appearance, layout (Grid & Flexbox), responsiveness, and styling of all new features.
