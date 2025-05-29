@@ -1,3 +1,9 @@
+/*
+-----------------------------------------------
+Modernized Blogger Template Style (v2)
+Based on: Rounders
+Date:     May 2025
+----------------------------------------------- */
 
 /* Base Styles & Typography */
 body {
@@ -30,12 +36,12 @@ a img {
 /* Page Structure (CSS Grid Layout) */
 #content {
   display: grid;
-  /* Define columns: 1fr for main content, 280px for sidebar (slightly wider for modern feel) */
-  grid-template-columns: 1fr 280px;
-  grid-template-rows: auto auto auto auto; /* Header, Main/Sidebar, Secondary Footer, Footer */
+  /* Now only one column for main content, as sidebar is removed */
+  grid-template-columns: 1fr;
+  grid-template-rows: auto auto auto auto; /* Header, Main, Secondary Footer, Footer */
   gap: 25px; /* Space between grid items */
   width: 95%; /* Fluid width */
-  max-width: 1200px; /* Max width for larger screens */
+  max-width: 1000px; /* Increased max width for the blog */
   margin: 0 auto; /* Center the content */
   text-align: left;
   padding: 0; /* Remove any default padding that might interfere with grid */
@@ -43,27 +49,21 @@ a img {
 
 /* Grid Area Assignments */
 #header {
-  grid-column: 1 / -1; /* Spans all columns */
+  grid-column: 1 / -1; /* Spans full width */
 }
 
 #main {
-  grid-column: 1; /* Main content in the first column */
+  grid-column: 1; /* Main content takes full width */
   background: #fff; /* Solid background, no image corners */
   border-radius: 8px; /* Rounded corners for the main content area */
   padding: 20px; /* Add internal padding */
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
 }
 
-#sidebar {
-  grid-column: 2; /* Sidebar in the second column */
-  background: #fff; /* Solid background for sidebar */
-  border-radius: 8px; /* Rounded corners for the sidebar area */
-  padding: 20px; /* Add internal padding */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); /* Subtle shadow */
-}
+/* Sidebar is removed, so no styles needed for #sidebar, #profile-container, .box */
 
 #secondary-footer {
-  grid-column: 1 / -1; /* Spans all columns */
+  grid-column: 1 / -1; /* Spans full width */
   background: #333; /* Dark background for secondary footer */
   color: #fff;
   padding: 30px;
@@ -76,7 +76,7 @@ a img {
 }
 
 #footer {
-  grid-column: 1 / -1; /* Spans all columns */
+  grid-column: 1 / -1; /* Spans full width */
 }
 
 /* Header */
@@ -138,12 +138,32 @@ a img {
   border-radius: 8px; /* Rounded corners for individual posts */
   overflow: hidden; /* Contains floats if any are introduced later */
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05); /* Light shadow for posts */
+  transition: transform 0.2s ease-in-out; /* Smooth hover effect for cards */
 }
+
+.post:hover {
+  transform: translateY(-5px); /* Lift effect on hover */
+}
+
+/* Hide post-body and post-footer on main page for card view */
+body:not(.item-page) .post .post-body,
+body:not(.item-page) .post .post-footer {
+  display: none;
+}
+
+/* Show post-body and post-footer on single post page */
+body.item-page .post .post-body,
+body.item-page .post .post-footer {
+  display: block; /* Or flex, depending on content */
+}
+
 
 .post-card-content {
   display: flex;
   flex-direction: column;
   padding: 15px;
+  height: 100%; /* Ensure cards have consistent height */
+  box-sizing: border-box; /* Include padding in height */
 }
 
 .post-image-container {
@@ -236,6 +256,22 @@ a.comment-link {
 a.comment-link::before { /* Modern way to add comment icon */
   content: '💬'; /* Emoji comment icon */
   margin-right: 5px;
+}
+
+/* All Posts Grid Layout */
+.posts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* 3 columns, responsive */
+  gap: 25px; /* Space between cards */
+}
+
+/* Date Header in Grid (optional styling) */
+.date-header {
+  grid-column: 1 / -1; /* Span all columns */
+  text-align: center;
+  margin-bottom: 25px;
+  font-size: 1.2rem;
+  color: #555;
 }
 
 /* Carousel Specific Styles */
@@ -350,6 +386,7 @@ a.comment-link::before { /* Modern way to add comment icon */
   background: #f8f8f8;
   border-radius: 8px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
+  grid-column: 1 / -1; /* Span full width in grid */
 }
 
 .pagination-controls .BlogPager { /* Target Blogger's default pagination container */
@@ -449,111 +486,6 @@ a.comment-link::before { /* Modern way to add comment icon */
   visibility: hidden;
 }
 
-/* Profile */
-#profile-container {
-  background: #cdc;
-  margin-bottom: 25px; /* Increased margin */
-  padding: 20px; /* Add internal padding */
-  color: #345;
-  border-radius: 8px; /* Rounded corners */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-}
-#profile-container h2 {
-  background: none; /* Remove image background */
-  padding: 0 0 10px;
-  margin: 0;
-  border-bottom: 1px solid #bba; /* Subtle border */
-  font-size: 1.2rem;
-  line-height: 1.5em;
-  color: #234;
-}
-.profile-datablock {
-  margin: 15px 0 10px; /* Adjusted margin */
-  border-top: 1px dotted #aba;
-  padding-top: 15px;
-}
-.profile-img {
-  display: inline-block; /* Use inline-block for better control */
-  vertical-align: top; /* Align image to top */
-}
-.profile-img img {
-  float: none; /* Remove float */
-  margin: 0 15px 10px 0; /* Adjusted margin */
-  border: 4px solid #fff;
-  border-radius: 50%; /* Make profile image round */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-.profile-data strong {
-  display: block;
-  font-size: 1.1rem;
-  margin-bottom: 5px;
-}
-#profile-container p {
-  margin: 0 0 1em;
-}
-#profile-container .profile-textblock {
-  clear: both; /* Keep clear for content after floated image */
-}
-#profile-container a {
-  color: #258;
-}
-.profile-link a {
-  background: none; /* Remove image background */
-  padding-left: 0; /* Reset padding */
-  font-weight: bold;
-  position: relative;
-}
-.profile-link a::before { /* Modern way to add profile icon */
-  content: '➡️'; /* Emoji arrow icon */
-  margin-right: 5px;
-}
-ul.profile-datablock {
-  list-style-type: none;
-  padding: 0;
-}
-
-/* Sidebar Boxes */
-.box {
-  background: #fff;
-  margin-bottom: 25px;
-  padding: 20px; /* Add internal padding */
-  color: #666;
-  border-radius: 8px; /* Rounded corners */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-}
-.box2 { /* No longer needed for background images, can be removed from HTML if desired */
-  padding: 0;
-}
-.sidebar-title {
-  margin: 0 0 15px;
-  padding: 0 0 10px;
-  border-bottom: 1px solid #9b9;
-  font-size: 1.2rem;
-  line-height: 1.5em;
-  color: #333;
-}
-.box ul {
-  margin: 15px 0 20px;
-  padding: 0;
-  list-style: none;
-}
-.box ul li {
-  background: none; /* Remove image background */
-  padding: 0 0 8px 0; /* Adjusted padding */
-  margin-bottom: 8px;
-  border-bottom: 1px dotted #eee;
-  line-height: 1.4em;
-  position: relative;
-}
-.box ul li::before { /* Modern way to add arrow icon */
-  content: '▸'; /* Unicode right-pointing triangle */
-  color: #258;
-  margin-right: 8px;
-}
-.box p {
-  margin: 0 0 1em;
-}
-
 /* Secondary Footer */
 #secondary-footer h3 {
   font-size: 1.3rem;
@@ -638,9 +570,10 @@ ul.profile-datablock {
     grid-template-columns: 1fr; /* Stack main and sidebar */
     gap: 20px; /* Slightly reduced gap */
     width: 90%;
+    max-width: 800px; /* Adjust max width for smaller desktops/large tablets */
   }
-  #main, #sidebar {
-    grid-column: 1; /* Both take full width */
+  #main {
+    grid-column: 1; /* Takes full width */
   }
   #header, #footer, #secondary-footer {
     padding: 15px 20px; /* Adjust padding */
@@ -662,6 +595,11 @@ ul.profile-datablock {
   .carousel-item .post-title {
     font-size: 1.4rem;
   }
+  /* All posts grid: Adjust to 2 columns on medium screens */
+  .posts-grid {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* 2 columns, responsive */
+    gap: 20px;
+  }
 }
 
 /* For screens smaller than 768px (typical tablet portrait / larger phone) */
@@ -672,6 +610,7 @@ ul.profile-datablock {
   #content {
     width: 95%; /* Take more width on smaller screens */
     gap: 15px;
+    max-width: unset; /* Remove max-width constraint for small screens */
   }
   #header, #footer, #secondary-footer {
     padding: 10px 15px;
@@ -714,8 +653,8 @@ ul.profile-datablock {
   .comment-timestamp {
     padding-left: 15px;
   }
-  .box, #profile-container, #main, #comments {
-    padding: 15px; /* Reduce padding for boxes */
+  #main, #comments {
+    padding: 15px; /* Reduce padding for main sections */
     border-radius: 5px; /* Smaller border radius */
   }
   #secondary-footer {
@@ -735,6 +674,11 @@ ul.profile-datablock {
   }
   #secondary-footer ul li {
     margin-bottom: 0;
+  }
+  /* All posts grid: Adjust to 1 column on small screens */
+  .posts-grid {
+    grid-template-columns: 1fr; /* Single column */
+    gap: 15px;
   }
 }
 
@@ -776,13 +720,13 @@ ul.profile-datablock {
   p.post-footer {
     padding: 6px 10px;
   }
-  .box, #profile-container, #main, #comments {
+  #main, #comments {
     padding: 10px;
   }
 }
 
-/* Remove old Blogger image-based backgrounds */
-@media all { /* Keeping these media queries for compatibility, though the images are removed */
+/* Remove old Blogger image-based backgrounds (ensure these are still present) */
+@media all {
   #main, #main2, #main3,
   #header div,
   #profile-container, #profile-container h2,
@@ -792,7 +736,7 @@ ul.profile-datablock {
     padding: initial !important; /* Reset padding that was tied to images */
   }
 }
-@media handheld { /* Keeping these media queries for compatibility */
+@media handheld {
   #main, #main2, #main3,
   #header, #header div,
   #profile-container, #profile-container h2,
