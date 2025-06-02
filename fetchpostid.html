@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Export Blogger Post IDs</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 2rem;
+      max-width: 600px;
+      margin: auto;
+      text-align: center;
+    }
+    h1 {
+      font-size: 24px;
+      margin-bottom: 1rem;
+    }
+    button {
+      padding: 12px 24px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    #status {
+      margin-top: 1rem;
+      color: green;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Export Blogger Post IDs</h1>
+  <p>This tool fetches all blog posts from your Blogger blog and exports the post titles and IDs as a CSV file.</p>
+  <button onclick="exportPostIDs()">Export Post IDs</button>
+  <p id="status"></p>
+
+  <script>
+    async function exportPostIDs() {
+      const status = document.getElementById("status");
+      status.textContent = "Fetching posts...";
+
+      try {
+        const url = "https://techbaytk.blogspot.com/feeds/posts/default?alt=json&max-results=500";
+        const response = await fetch(url);
+        const json = await response.json();
+        const entries = json.feed.entry || [];
+
+        // Prepare CSV content
+        let csvContent = "Post Title,Post ID\n";
+
+        entries.forEach(entry => {
+          const title = entry.title.$t.replace(/,/g, ""); // Remove commas for CSV safety
+          const idStr = entry.id.$t;
+          const postIdMatch = idStr.match(/blog-\d+\.post-(\d+)/);
+          const postId = postIdMatch ? postIdMatch[1] : "";
+
+          csvContent += `"${title}","${postId}"\n`;
+        });
+
+        // Create and download CSV file
+        const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(blob);
+        link.download = "blogger_post_ids.csv";
+        link.click();
+
+        status.textContent = `✅ Exported ${entries.length} posts.`;
+
+      } catch (err) {
+        console.error(err);
+        status.textContent = "❌ Error fetching post IDs."+ err;
+      }
+    }
+  </script>
+</body>
+</html>

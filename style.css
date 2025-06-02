@@ -1,760 +1,123 @@
-/*
------------------------------------------------
-Modernized Blogger Template Style (v4 - Revamped)
-Based on: Rounders
-Date:     May 2025
------------------------------------------------ */
 
-/* Base Styles & Typography */
 body {
-  background: #aba;
-  margin: 0;
-  padding: 20px 10px;
-  text-align: center;
-  font-family: "Inter", "Trebuchet MS", Verdana, Arial, Sans-serif; /* Using Inter font, fallback to original */
-  color: #333;
-  font-size: 1rem; /* Using rem for better accessibility */
-  line-height: 1.6; /* Slightly adjusted line height for readability */
-}
-
-/* Links */
-a:link {
-  color: #258;
-  text-decoration: none; /* Remove default underline */
-}
-a:visited {
-  color: #666;
-}
-a:hover {
-  color: #c63;
-  text-decoration: underline; /* Add underline on hover for clarity */
-}
-a img {
-  border-width: 0;
-}
-
-/* Page Structure (CSS Grid Layout) */
-#content {
-  display: grid;
-  grid-template-columns: 1fr; /* Single column layout */
-  grid-template-rows: auto auto auto auto; /* Header, Main, Secondary Footer, Footer */
-  gap: 25px; /* Space between grid items */
-  width: 95%; /* Fluid width */
-  max-width: 1000px; /* Increased max width for the blog content */
-  margin: 0 auto; /* Center the content */
-  text-align: left;
-  padding: 0; /* Remove any default padding that might interfere with grid */
-}
-
-/* Grid Area Assignments */
-#header {
-  grid-column: 1 / -1; /* Spans full width */
-}
-
-#main {
-  grid-column: 1; /* Main content takes full width */
-  background: #fff; /* Solid background, no image corners */
-  border-radius: 8px; /* Rounded corners for the main content area */
-  padding: 20px; /* Add internal padding */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-}
-
-/* Sidebar is removed, so no styles needed for #sidebar, #profile-container, .box */
-/* Removed all sidebar-related CSS rules */
-
-#secondary-footer {
-  grid-column: 1 / -1; /* Spans full width */
-  background: #333; /* Dark background for secondary footer */
-  color: #fff;
-  padding: 30px;
-  border-radius: 8px;
-  box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.15);
-  display: flex; /* Use flexbox for internal layout */
-  justify-content: space-around;
-  flex-wrap: wrap; /* Allow wrapping on smaller screens */
-  gap: 20px;
-}
-
-#footer {
-  grid-column: 1 / -1; /* Spans full width */
-}
-
-/* Header */
-#header {
-  background: #456;
-  padding: 20px 30px; /* Increased padding */
-  color: #fff;
-  border-radius: 8px; /* Rounded corners for the header */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* More prominent shadow */
-}
-#header div { /* This div is no longer needed for background images, but can be kept for inner padding if desired */
-  padding: 0; /* Resetting padding if it was for images */
-}
-#blog-title {
-  margin: 0;
-  padding: 0;
-  font-size: 2.5rem; /* Larger font size */
-  line-height: 1.2em;
-}
-#blog-title a {
-  text-decoration: none;
-  color: #fff;
-}
-#description {
-  margin: 5px 0 0;
-  padding: 0;
-  font-size: 1rem;
-  line-height: 1.5em;
-  opacity: 0.9; /* Slightly transparent */
-}
-
-/* Sections within Main Content */
-#latest-posts-carousel-section,
-#all-posts-list-section,
-#comments {
-  background: #fff; /* Ensure these sections have a white background */
-  border-radius: 8px;
-  padding: 20px;
-  margin-bottom: 25px; /* Space between sections */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-}
-
-#latest-posts-carousel-section h2,
-#all-posts-list-section h2,
-#comments h4 {
-  font-size: 1.8rem;
-  margin-bottom: 20px;
-  color: #333;
-  border-bottom: 2px solid #eee;
-  padding-bottom: 10px;
-}
-
-/* Posts (General Styling for both carousel and list) */
-.post {
-  margin-bottom: 20px; /* Space between posts */
-  padding: 0; /* Remove horizontal padding, main div handles it */
-  border: none; /* Remove dotted borders */
-  background: #fff; /* Ensure post background is white */
-  border-radius: 8px; /* Rounded corners for individual posts */
-  overflow: hidden; /* Contains floats if any are introduced later */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05); /* Light shadow for posts */
-  transition: transform 0.2s ease-in-out; /* Smooth hover effect for cards */
-}
-
-.post:hover {
-  transform: translateY(-5px); /* Lift effect on hover */
-}
-
-/* Post body and footer visibility based on page type */
-body:not(.item-page) .post .post-body,
-body:not(.item-page) .post .post-footer {
-  display: none; /* Hide on index/archive pages */
-}
-
-body.item-page .post .post-body,
-body.item-page .post .post-footer {
-  display: block; /* Show on single post (item) pages */
-}
-
-/* Ensure post-body and post-footer are styled when they ARE rendered (on item page) */
-.post-body {
-  padding: 0 15px 15px; /* Add internal padding */
-  border-top: 1px dotted #eee; /* Separator for body */
-  margin-top: 15px;
-}
-.post p {
-  margin: 0 0 1em; /* Increased paragraph margin */
-}
-p.post-footer {
-  background: #f8f8f8; /* Lighter background for footer */
-  margin: 0;
-  padding: 10px 15px; /* Adjusted padding */
-  border: none; /* Remove dotted borders */
-  font-size: 0.9rem;
-  line-height: 1.5em;
-  color: #666;
-  display: flex; /* Use flexbox for alignment */
-  justify-content: space-between; /* Space out items */
-  align-items: center; /* Vertically center items */
-  border-top: 1px solid #ddd; /* Separator for footer */
-}
-p.post-footer em {
-  display: block;
-  font-style: normal;
-  order: -1; /* Puts the date/author first in flex order */
-}
-a.comment-link {
-  background: none; /* Remove image background */
-  padding-left: 0; /* Reset padding */
-  position: relative;
-  margin-left: 15px; /* Space from other elements */
-}
-a.comment-link::before { /* Modern way to add comment icon */
-  content: '💬'; /* Emoji comment icon */
-  margin-right: 5px;
-}
-
-.post-card-content {
-  display: flex;
-  flex-direction: column;
-  padding: 15px;
-  height: 100%; /* Ensure cards have consistent height */
-  box-sizing: border-box; /* Include padding in height */
-}
-
-.post-image-container {
-  width: 100%;
-  height: 200px; /* Fixed height for consistency */
-  overflow: hidden;
-  border-radius: 6px;
-  margin-bottom: 15px;
-}
-
-.post-thumbnail {
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* Cover the container, cropping if necessary */
-  display: block;
-  transition: transform 0.3s ease; /* Smooth hover effect */
-}
-
-.post-image-container a:hover .post-thumbnail {
-  transform: scale(1.05); /* Zoom effect on hover */
-}
-
-.post-title {
-  margin: 0 0 10px;
-  font-size: 1.4rem;
-  line-height: 1.4em;
-  color: #333;
-  background: none; /* Remove background from here */
-  padding: 0; /* Remove padding from here */
-  border: none; /* Remove border from here */
-  position: static; /* Reset position */
-}
-.post-title::before { /* Remove pseudo-element from here, it's for general posts */
-  content: none;
-}
-a.title-link, .post-title strong {
-  text-decoration: none;
-  display: block;
-  padding-left: 0; /* Reset padding */
-}
-a.title-link:hover {
-  background-color: transparent; /* Reset hover background */
-  color: #258; /* Keep original link color on hover */
-}
-
-.post-date {
-  font-size: 0.85rem;
-  color: #777;
-  margin-bottom: 15px;
-}
-.post-date a {
-  color: #777;
-}
-.post-date a:hover {
-  color: #c63;
-}
-
-/* All Posts Grid Layout */
-.posts-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* 3 columns, responsive */
-  gap: 25px; /* Space between cards */
-}
-
-/* Date Header in Grid (optional styling) */
-.date-header {
-  grid-column: 1 / -1; /* Span all columns */
-  text-align: center;
-  margin-bottom: 25px;
-  font-size: 1.2rem;
-  color: #555;
-}
-
-/* Carousel Specific Styles */
-.carousel-wrapper {
-  position: relative;
-  width: 100%;
-  overflow: hidden; /* Hide overflowing items */
-  border-radius: 8px;
-  background: #fdfdfd;
-  padding: 10px;
-  box-shadow: inset 0 0 8px rgba(0,0,0,0.05); /* Inner shadow */
-}
-
-.carousel-inner {
-  display: flex;
-  transition: transform 0.5s ease-in-out; /* Smooth slide transition */
-}
-
-.carousel-item {
-  min-width: 100%; /* Each item takes full width of the carousel-inner */
-  box-sizing: border-box; /* Include padding and border in the width */
-  flex-shrink: 0; /* Prevent items from shrinking */
-  display: none; /* Hidden by default, shown by JS */
-  padding: 15px;
-  text-align: center;
-  background: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-}
-
-.carousel-item.active {
-  display: block; /* Show active item */
-}
-
-.carousel-item .post-image-container {
-  height: 250px; /* Slightly taller images for carousel */
-  margin-bottom: 20px;
-}
-
-.carousel-item .post-title {
-  font-size: 1.6rem;
-  margin-bottom: 10px;
-}
-
-.carousel-item .post-date {
-  font-size: 0.9rem;
-  margin-bottom: 0;
-}
-
-.carousel-control {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background-color: rgba(0, 0, 0, 0.5);
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  cursor: pointer;
-  z-index: 10;
-  font-size: 1.5rem;
-  border-radius: 50%; /* Round buttons */
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background-color 0.3s ease;
-}
-
-.carousel-control:hover {
-  background-color: rgba(0, 0, 0, 0.7);
-}
-
-.carousel-control.prev {
-  left: 10px;
-}
-
-.carousel-control.next {
-  right: 10px;
-}
-
-.carousel-indicators {
-  position: absolute;
-  bottom: 10px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 8px;
-  z-index: 10;
-}
-
-.indicator-dot {
-  width: 10px;
-  height: 10px;
-  background-color: rgba(255, 255, 255, 0.6);
-  border-radius: 50%;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  border: 1px solid rgba(0,0,0,0.2);
-}
-
-.indicator-dot.active {
-  background-color: #258;
-  border: 1px solid #258;
-}
-
-/* Pagination Controls */
-.pagination-controls {
-  text-align: center;
-  margin-top: 30px;
-  padding: 15px;
-  background: #f8f8f8;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
-  grid-column: 1 / -1; /* Span full width in grid */
-}
-
-.pagination-controls .BlogPager { /* Target Blogger's default pagination container */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-}
-
-.pagination-controls .BlogPager a,
-.pagination-controls .BlogPager span {
-  display: inline-block;
-  padding: 8px 15px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  text-decoration: none;
-  color: #258;
+  font-family: 'Open Sans', sans-serif;
   background-color: #fff;
-  transition: all 0.3s ease;
+  color: #656565;
+  line-height: 1.6;
 }
 
-.pagination-controls .BlogPager a:hover {
-  background-color: #eef;
-  border-color: #c63;
-  color: #c63;
-}
-
-.pagination-controls .BlogPager .current {
-  background-color: #258;
-  color: #fff;
-  border-color: #258;
-  font-weight: bold;
-}
-
-/* Comments */
-#comments {
-  margin-top: 20px; /* Adjusted margin */
-  border: none; /* Remove dotted borders */
-  padding: 20px; /* Add internal padding */
-  background: #fff;
-  border-radius: 8px; /* Rounded corners */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05); /* Light shadow */
-}
-#comments h4 {
-  margin: 0 0 15px;
-  padding: 0 0 10px;
-  border-bottom: 1px solid #eee;
-  font-size: 1.3rem;
-  line-height: 1.4em;
-  color: #333;
-}
-#comments-block {
-  margin: 0 0 20px; /* Adjusted margin */
-}
-.comment-data {
-  background: none; /* Remove image background */
-  padding-left: 0; /* Reset padding */
-  position: relative;
-  margin-bottom: 5px;
-  color: #666;
-}
-.comment-data::before { /* Modern way to add comment icon */
-  content: '👤'; /* Emoji user icon */
-  margin-right: 5px;
-}
-.comment-poster {
-  font-weight: bold;
-  color: #333;
-}
-.comment-body {
-  margin: 0 0 1.5em;
-  padding-left: 25px; /* Indent comment body */
-  border-left: 3px solid #eee; /* Add a subtle left border */
-}
-.comment-body p {
-  margin: 0 0 .5em;
-}
-.comment-timestamp {
-  margin: 0 0 1em;
-  padding-left: 25px;
-  color: #999;
-  font-size: 0.85rem;
-}
-.comment-timestamp a:link {
-  color: #999;
-}
-.deleted-comment {
-  font-style: italic;
-  color: gray;
-}
-.paging-control-container {
-  float: right; /* Keep float for now, or refactor with flexbox if needed */
-  margin: 0px 6px 0px 0px;
-  font-size: 0.8rem;
-}
-.unneeded-paging-control {
-  visibility: hidden;
-}
-
-/* Secondary Footer */
-#secondary-footer h3 {
-  font-size: 1.3rem;
-  color: #fff;
-  margin-bottom: 15px;
-  border-bottom: 1px solid rgba(255,255,255,0.2);
-  padding-bottom: 10px;
-}
-
-#secondary-footer .social-links-section,
-#secondary-footer .tags-section {
-  flex: 1; /* Allow sections to grow */
-  min-width: 250px; /* Minimum width before wrapping */
-  padding: 10px;
-}
-
-#secondary-footer ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-#secondary-footer ul li {
-  margin-bottom: 8px;
-}
-
-#secondary-footer ul li a {
-  color: #ccc;
+a {
   text-decoration: none;
+  color: #e51515;
+}
+
+a:hover {
+  color: #000;
+}
+
+.container {
+  max-width: 1170px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+header {
+  background: linear-gradient(135deg, #e51515, #ff6f61);
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.logo-content a {
+  color: #fff;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  margin-top: 10px;
+}
+
+nav ul li a {
+  color: #fff;
+  font-size: 14px;
   transition: color 0.3s ease;
 }
 
-#secondary-footer ul li a:hover {
-  color: #fff;
-  text-decoration: underline;
+nav ul li a:hover {
+  color: #ffe0e0;
 }
 
-
-/* Footer */
-#footer {
-  clear: both;
-  margin-top: 0; /* No margin-top, secondary footer handles it */
-  background: #456;
-  padding: 20px 30px;
-  color: #fff;
-  border-radius: 8px; /* Rounded corners */
-  box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.15); /* Shadow for footer */
+#hot-wrapper {
+  padding: 20px;
 }
-#footer div { /* No longer needed for background images */
+
+.post-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.post {
+  background: #f9f9f9;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  transition: transform 0.3s ease;
+}
+
+.post:hover {
+  transform: translateY(-5px);
+}
+
+.post img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.post-content {
+  padding: 15px;
+}
+
+.post-content h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: #111111;
+}
+
+.sidebar {
+  background: #f1f1f1;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.sidebar h3 {
+  font-size: 16px;
+  margin-bottom: 10px;
+  color: #111111;
+}
+
+.sidebar ul {
+  list-style: none;
   padding: 0;
 }
-#footer hr {
-  display: none;
-}
-#footer p {
-  margin: 0;
-  text-align: center; /* Center footer text */
-  font-size: 0.9rem;
-  opacity: 0.9;
-}
-#footer a {
-  color: #fff;
-  text-decoration: underline;
+
+.sidebar ul li {
+  margin-bottom: 10px;
 }
 
-/* Feeds */
-#blogfeeds {
-  margin-top: 20px;
+.sidebar ul li a {
+  color: #e51515;
+  font-size: 14px;
+}
+
+footer {
+  background: #f1f1f1;
+  padding: 20px;
   text-align: center;
-}
-#postfeeds {
-  padding: 0; /* Remove padding */
-  text-align: center;
-  margin-top: 20px;
-}
-
-/* Cool Feature: Scroll-triggered Fade-in Animation */
-.fade-in-on-scroll {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-}
-
-.fade-in-on-scroll.fade-in-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-
-/* Responsive Design (Media Queries) */
-
-/* For screens smaller than 992px (typical tablet landscape) */
-@media (max-width: 991px) {
-  #content {
-    grid-template-columns: 1fr; /* Single column layout */
-    gap: 20px; /* Slightly reduced gap */
-    width: 90%;
-    max-width: 800px; /* Adjust max width for smaller desktops/large tablets */
-  }
-  #main {
-    grid-column: 1; /* Takes full width */
-  }
-  #header, #footer, #secondary-footer {
-    padding: 15px 20px; /* Adjust padding */
-  }
-  #blog-title {
-    font-size: 2rem; /* Reduce font size */
-  }
-  #latest-posts-carousel-section h2,
-  #all-posts-list-section h2,
-  #comments h4 {
-    font-size: 1.5rem;
-  }
-  .post-title {
-    font-size: 1.3rem;
-  }
-  .carousel-item .post-image-container {
-    height: 200px; /* Adjust carousel image height */
-  }
-  .carousel-item .post-title {
-    font-size: 1.4rem;
-  }
-  /* All posts grid: Adjust to 2 columns on medium screens */
-  .posts-grid {
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* 2 columns, responsive */
-    gap: 20px;
-  }
-}
-
-/* For screens smaller than 768px (typical tablet portrait / larger phone) */
-@media (max-width: 767px) {
-  body {
-    padding: 10px 5px; /* Reduce overall padding */
-  }
-  #content {
-    width: 95%; /* Take more width on smaller screens */
-    gap: 15px;
-    max-width: unset; /* Remove max-width constraint for small screens */
-  }
-  #header, #footer, #secondary-footer {
-    padding: 10px 15px;
-    border-radius: 5px; /* Smaller border radius */
-  }
-  #blog-title {
-    font-size: 1.8rem;
-  }
-  #description {
-    font-size: 0.9rem;
-  }
-  #latest-posts-carousel-section h2,
-  #all-posts-list-section h2,
-  #comments h4 {
-    font-size: 1.3rem;
-  }
-  .post-title {
-    font-size: 1.2rem;
-  }
-  .post-card-content {
-    padding: 10px;
-  }
-  .post-image-container {
-    height: 180px; /* Further adjust image height */
-  }
-  .post-body {
-    padding: 10px; /* Reduce padding */
-  }
-  p.post-footer {
-    padding: 8px 15px;
-    flex-direction: column; /* Stack footer items vertically */
-    align-items: flex-start; /* Align items to start */
-  }
-  p.post-footer em {
-    margin-bottom: 5px; /* Space between date and comments */
-  }
-  .comment-body {
-    padding-left: 15px; /* Reduce indent */
-  }
-  .comment-timestamp {
-    padding-left: 15px;
-  }
-  #main, #comments {
-    padding: 15px; /* Reduce padding for main sections */
-    border-radius: 5px; /* Smaller border radius */
-  }
-  #secondary-footer {
-    flex-direction: column; /* Stack social and tags sections */
-    text-align: center;
-  }
-  #secondary-footer .social-links-section,
-  #secondary-footer .tags-section {
-    min-width: unset; /* Remove min-width constraint */
-    width: 100%; /* Take full width */
-  }
-  #secondary-footer ul {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 10px;
-  }
-  #secondary-footer ul li {
-    margin-bottom: 0;
-  }
-  /* All posts grid: Adjust to 1 column on small screens */
-  .posts-grid {
-    grid-template-columns: 1fr; /* Single column */
-    gap: 15px;
-  }
-}
-
-/* For very small screens (mobile phones) */
-@media (max-width: 480px) {
-  body {
-    padding: 5px;
-  }
-  #content {
-    width: 98%;
-    gap: 10px;
-  }
-  #header, #footer, #secondary-footer {
-    padding: 8px 10px;
-  }
-  #blog-title {
-    font-size: 1.5rem;
-  }
-  #description {
-    font-size: 0.85rem;
-  }
-  #latest-posts-carousel-section h2,
-  #all-posts-list-section h2,
-  #comments h4 {
-    font-size: 1.1rem;
-  }
-  .post-title {
-    font-size: 1.1rem;
-  }
-  .post-card-content {
-    padding: 8px;
-  }
-  .post-image-container {
-    height: 150px; /* Smallest image height */
-  }
-  .post-body {
-    padding: 8px;
-  }
-  p.post-footer {
-    padding: 6px 10px;
-  }
-  #main, #comments {
-    padding: 10px;
-  }
-}
-
-/* Remove old Blogger image-based backgrounds (ensure these are still present) */
-@media all {
-  #main, #main2, #main3,
-  #header div,
-  #profile-container, #profile-container h2,
-  .box, .box2,
-  #footer div, #footer div div {
-    background: none !important; /* Force removal of original image backgrounds */
-    padding: initial !important; /* Reset padding that was tied to images */
-  }
-}
-@media handheld {
-  #main, #main2, #main3,
-  #header, #header div,
-  #profile-container, #profile-container h2,
-  .box, .box2,
-  #footer div, #footer div div {
-    background: none !important;
-    padding: initial !important;
-  }
+  color: #656565;
+  font-size: 14px;
 }
