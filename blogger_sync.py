@@ -5,12 +5,12 @@ import html2text
 import yaml # For creating YAML front matter
 
 # --- Configuration ---
-BLOGGER_API_KEY = os.environ.get('BLOGGER_API_KEY') # Get from GitHub Secrets
+BLOGGER_API_KEY =os.environ.get('BLOGGER_API_KEY') # Get from GitHub Secrets
 
 # !!! IMPORTANT: Replace 'YOUR_BLOG_ID' with your actual Blogger Blog ID !!!
 # You can find your Blog ID in your Blogger dashboard URL.
 # For example, if your blog is at 'https://www.blogger.com/blog/posts/1234567890', then 1234567890 is your BLOG_ID.
-BLOG_ID = 'YOUR_BLOG_ID' 
+BLOG_ID = '8740371480799149020' 
 
 # The directory where Markdown files will be saved for Jekyll
 # Jekyll looks for posts in the _posts/ directory
