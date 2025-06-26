@@ -1,0 +1,51 @@
+name: Sync Blogger Posts and Build Jekyll Site
+
+on:
+  workflow_dispatch: # Allows manual triggering from GitHub Actions UI
+  schedule:
+    - cron: '0 0 * * *' # Runs once every day at midnight UTC (adjust as needed)
+
+jobs:
+  sync_and_build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x' 
+
+      - name: Install Python dependencies
+        run: |
+          pip install google-api-python-client google-auth-oauthlib google-auth-httplib2 html2text PyYAML
+
+      - name: Run Blogger Sync Script
+        env:
+          BLOGGER_API_KEY: ${{ secrets.BLOGGER_API_KEY }} # Retrieve API key from GitHub Secrets
+          BLOG_ID: 'YOUR_BLOG_ID' # !!! IMPORTANT: Replace this with your actual BLOG_ID directly, or use a secret for it as well: ${{ secrets.BLOGGER_BLOG_ID }}
+        run: |
+          python blogger_sync.py
+
+      - name: Set up Ruby and Jekyll
+        uses: actions/setup-ruby@v1 # Use a Ruby setup action
+        with:
+          ruby-version: '3.x' # Use a recent Ruby version compatible with Jekyll
+
+      - name: Install Jekyll dependencies
+        run: |
+          gem install bundler jekyll # Install bundler and Jekyll
+          bundle install # Install gems from Gemfile if you have one (optional but good practice)
+
+      - name: Build Jekyll site
+        run: |
+          jekyll build # This will build your site into the _site folder
+
+      - name: Commit and Push changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com" # Official GitHub Actions bot email
+          git add .
+          git commit -m "Automated: Sync Blogger posts and build Jekyll site" || echo "No changes to commit"
+          git push
