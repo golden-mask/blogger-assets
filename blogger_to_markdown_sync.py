@@ -153,7 +153,7 @@ def convert_post_to_markdown(post):
     # !!! USE THE NEW create_slug FUNCTION HERE !!!
     slug = create_slug(title) 
 
-    filename = f"{slug}.md" # Filename is now just the cleaned title
+    filename = f"{post_date_filename}-{slug}.md" # Filename is now just the cleaned title
 
     full_content = f"---\n{yaml.safe_dump(front_matter, allow_unicode=True, default_flow_style=False)}---\n\n{markdown_content}"
     return filename, full_content
