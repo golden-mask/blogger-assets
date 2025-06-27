@@ -9,6 +9,8 @@ body {
     display: flex;
     justify-content: center;
     min-height: 100vh; /* Full viewport height */
+    display: flex;
+    align-items: center;
 }
 
 /* Container for content */
@@ -144,6 +146,215 @@ footer {
     color: #777;
 }
 
+/* flip card style */
+
+/* Wrapper for the flip effect */
+.flip-container {
+    width: 350px; /* عرض البطاقة */
+    height: 450px; /* ارتفاع البطاقة */
+    perspective: 1000px; /* للتحكم في عمق تأثير 3D للقلب */
+    box-sizing: border-box;
+    transform-style: preserve-3d;
+}
+
+.flipper {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.6s cubic-bezier(0.455, 0.03, 0.515, 0.955); /* حركة قلب سلسة */
+    transform-origin: center center; 
+}
+
+/* Apply transform to .flipper on .flip-container hover */
+.flip-container:hover .flipper {
+    transform: rotateY(180deg); /* تدوير 180 درجة على محور Y عند التمرير */
+}
+
+/* Front and Back of the card */
+.front-card,
+.back-card {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden; /* يخفي الوجه الخلفي عند عدم رؤيته */
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    display: flex; /* Flexbox for centering/layout */
+    flex-direction: column; /* Stack content vertically */
+    justify-content: center; /* Center content vertically */
+    align-items: center; /* Center content horizontally */
+    text-align: center;
+    color: white;
+    box-sizing: border-box;
+    transform-origin: center center;
+    padding: 30px; /* Add padding to the card content */
+}
+
+.front-card {
+    background: linear-gradient(135deg, #4a90e2 0%, #63b8ff 100%); /* لون أزرق للواجهة الأمامية */
+    z-index: 2;
+}
+
+.back-card {
+    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%); /* لون داكن للواجهة الخلفية */
+    transform: rotateY(180deg); /* الوجه الخلفي يبدأ مقلوبًا */
+    z-index: 1; 
+    overflow: hidden; /* Hide overflowing background image */
+    background-size: cover; /* Cover the area with the image */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Do not repeat the image */
+}
+
+/* Overlay for the background image on the back side */
+.back-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay for text readability */
+    border-radius: 15px;
+    z-index: 0; /* Behind the text content */
+}
+
+/* --- Weather Front Card Specific Styles --- */
+.weather-icon-large {
+    position: absolute;
+    width: 180px; /* Larger size */
+    height: 180px;
+    opacity: 0.2; /* Transparent to be behind text */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Centered exactly */
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: 0; /* Behind the text */
+}
+
+.city-name {
+    font-size: 2.2em;
+    font-weight: bold;
+    margin-bottom: 10px;
+    position: relative; /* Ensure it's above the icon */
+    z-index: 1;
+}
+
+.temperature {
+    font-size: 4em;
+    font-weight: bold;
+    margin-bottom: 5px;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    position: relative; /* Ensure it's above the icon */
+    z-index: 1;
+}
+
+.description {
+    font-size: 1.3em;
+    margin-bottom: 20px;
+    text-transform: capitalize;
+    position: relative; /* Ensure it's above the icon */
+    z-index: 1;
+}
+
+.info-row {
+    display: flex;
+    justify-content: space-around;
+    font-size: 0.9em;
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+    padding-top: 15px;
+    margin-top: 20px;
+    width: 100%; /* Take full width */
+    position: relative; /* Ensure it's above the icon */
+    z-index: 1;
+}
+
+.info-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.info-value {
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+.last-updated-time {
+    position: absolute;
+    bottom: 10px;
+    left: 15px;
+    font-size: 0.7em;
+    opacity: 0.7;
+    z-index: 1;
+}
+
+/* --- Quote Back Card Specific Styles --- */
+.quote-title {
+    font-size: 1.8em;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+    width: 100%;
+    position: relative; /* Ensure it's above the overlay */
+    z-index: 1;
+}
+
+.quote-text {
+    font-size: 1.2em;
+    font-style: italic;
+    margin-bottom: 15px;
+    padding: 0 10px;
+    line-height: 1.5;
+    position: relative; /* Ensure it's above the overlay */
+    z-index: 1;
+}
+
+.quote-author {
+    font-size: 1em;
+    font-weight: bold;
+    text-align: center;
+    width: 100%;
+    opacity: 0.8;
+    position: relative; /* Ensure it's above the overlay */
+    z-index: 1;
+}
+
+.picsum-attribution {
+    position: absolute;
+    bottom: 10px;
+    left: 15px;
+    font-size: 0.6em;
+    opacity: 0.6;
+    color: rgba(255, 255, 255, 0.8);
+    z-index: 1;
+}
+
+/* Spinner and error styles */
+.loading-message, .error-message {
+    text-align: center;
+    font-size: 1.2em;
+    color: #fff;
+    margin-top: 20px;
+}
+
+.spinner {
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    border-top: 4px solid #fff;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    animation: spin 1s linear infinite;
+    margin: 20px auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
 /* Responsive Adjustments */
 @media (max-width: 768px) {
     body {
@@ -161,5 +372,31 @@ footer {
     }
     article h1 {
         font-size: 2em;
+    }
+    .flip-container {
+        width: 95%; 
+        height: 400px; 
+    }
+    .city-name {
+        font-size: 1.8em;
+    }
+    .temperature {
+        font-size: 3.5em;
+    }
+    .description {
+        font-size: 1.1em;
+    }
+    .weather-icon-large {
+        width: 140px;
+        height: 140px;
+    }
+    .quote-title {
+        font-size: 1.5em;
+    }
+    .quote-text {
+        font-size: 1em;
+    }
+    .last-updated-time, .picsum-attribution {
+        font-size: 0.6em;
     }
 }

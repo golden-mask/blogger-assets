@@ -15,6 +15,40 @@
 
     <main>
         {{ content }}
+        <div class="flip-container">
+            <div class="flipper">
+                <div class="front-card">
+                    <div class="weather-icon-large" id="weatherIconLarge"></div>
+                    <div class="city-name" id="cityName">دمشق</div>
+                    <div class="temperature" id="temperature">--°C</div>
+                    <div class="description" id="weatherDescription">جاري التحميل...</div>
+                    
+                    <div class="info-row">
+                        <div class="info-item">
+                            الرطوبة
+                            <span class="info-value" id="humidity">--%</span>
+                        </div>
+                        <div class="info-item">
+                            الرياح
+                            <span class="info-value" id="windSpeed">-- م/ث</span>
+                        </div>
+                        <div class="info-item">
+                            الضغط
+                            <span class="info-value" id="pressure">-- hPa</span>
+                        </div>
+                    </div>
+                    <div class="last-updated-time" id="lastUpdatedTime">آخر تحديث: --</div>
+                </div>
+        
+                <div class="back-card">
+                    <div class="quote-title">اقتباس اليوم</div>
+                    <div class="quote-text" id="quoteText">جاري التحميل...</div>
+                    <div class="quote-author" id="quoteAuthor">--</div>
+                    <div class="picsum-attribution">صورة الخلفية من <a href="https://picsum.photos/" target="_blank" style="color: inherit; text-decoration: underline;">Picsum Photos</a></div>
+                </div>
+            </div>
+        </div>
+        
     </main>
 
     <footer>
