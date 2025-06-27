@@ -50,10 +50,11 @@ Obsidian: (Optional, but recommended for content management).
 1. Clone the Repository
 Clone this repository to your local machine:
 
-Bash
+```Bash
 
 git clone https://github.com/golden-mask/golden-mask.github.io.git
 cd golden-mask.github.io
+```
 2. Configure Jekyll Structure
 The repository is already set up with a minimal Jekyll structure:
 

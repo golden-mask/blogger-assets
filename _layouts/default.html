@@ -6,53 +6,158 @@
     <title>{{ page.title }}</title>
     <link rel="stylesheet" href="{{ "/assets/main.css" | relative_url }}">
     {% seo %}
+
+    <!-- Include Lunr.js library -->
+    <script src="https://unpkg.com/lunr/lunr.js"></script> 
+    <style>
+        /* Basic styles for the search icon (SVG) */
+        .search-icon-svg {
+            width: 24px;
+            height: 24px;
+            fill: #007bff; /* Match your primary blue */
+            cursor: pointer;
+            vertical-align: middle;
+            margin-left: 10px;
+        }
+        .search-container {
+            position: relative;
+            display: inline-block;
+        }
+        #search-input {
+            padding: 8px 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1em;
+            width: 0; /* Hidden initially */
+            opacity: 0;
+            transition: width 0.3s ease, opacity 0.3s ease;
+            vertical-align: middle;
+            overflow: hidden;
+        }
+        #search-input.active {
+            width: 200px; /* Expand when active */
+            opacity: 1;
+        }
+        #search-results {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0 0 0;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        #search-results li {
+            padding: 10px 15px;
+            border-bottom: 1px solid #eee;
+        }
+        #search-results li:last-child {
+            border-bottom: none;
+        }
+        #search-results li a {
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+        }
+        #search-results li p {
+            font-size: 0.9em;
+            color: #555;
+            margin: 5px 0 0 0;
+        }
+    </style>
 </head>
 <body>
     <header>
-        <h1><a href="{{ "/" | relative_url }}">{{ site.title }}</a></h1>
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <h1><a href="{{ "/" | relative_url }}">techbaytk</a></h1>
+            <div class="search-container">
+                <input type="text" id="search-input" placeholder="Search blog...">
+                <svg class="search-icon-svg" id="search-icon" viewBox="0 0 24 24">
+                    <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                </svg>
+            </div>
+        </div>
         <p>{{ site.description }}</p>
     </header>
 
     <main>
         {{ content }}
-        <div class="flip-container">
-            <div class="flipper">
-                <div class="front-card">
-                    <div class="weather-icon-large" id="weatherIconLarge"></div>
-                    <div class="city-name" id="cityName">دمشق</div>
-                    <div class="temperature" id="temperature">--°C</div>
-                    <div class="description" id="weatherDescription">جاري التحميل...</div>
-                    
-                    <div class="info-row">
-                        <div class="info-item">
-                            الرطوبة
-                            <span class="info-value" id="humidity">--%</span>
-                        </div>
-                        <div class="info-item">
-                            الرياح
-                            <span class="info-value" id="windSpeed">-- م/ث</span>
-                        </div>
-                        <div class="info-item">
-                            الضغط
-                            <span class="info-value" id="pressure">-- hPa</span>
-                        </div>
-                    </div>
-                    <div class="last-updated-time" id="lastUpdatedTime">آخر تحديث: --</div>
-                </div>
-        
-                <div class="back-card">
-                    <div class="quote-title">اقتباس اليوم</div>
-                    <div class="quote-text" id="quoteText">جاري التحميل...</div>
-                    <div class="quote-author" id="quoteAuthor">--</div>
-                    <div class="picsum-attribution">صورة الخلفية من <a href="https://picsum.photos/" target="_blank" style="color: inherit; text-decoration: underline;">Picsum Photos</a></div>
-                </div>
-            </div>
-        </div>
-        
+        <ul id="search-results"></ul> <!-- Container for search results -->
     </main>
 
     <footer>
         <p>&copy; {{ site.time | date: "%Y" }} {{ site.title }}. Powered by Jekyll.</p>
     </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('search-input');
+            const searchIcon = document.getElementById('search-icon');
+            const searchResultsContainer = document.getElementById('search-results');
+            let idx; // Lunr index
+            let documents; // Stores raw post data
+
+            searchIcon.addEventListener('click', function() {
+                searchInput.classList.toggle('active');
+                if (searchInput.classList.contains('active')) {
+                    searchInput.focus();
+                } else {
+                    searchInput.value = '';
+                    searchResultsContainer.innerHTML = ''; // Clear results when closing
+                }
+            });
+
+            fetch('/search.json')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    documents = data; // Store original documents
+                    idx = lunr(function () {
+                        this.ref('url');
+                        this.field('title', { boost: 10 });
+                        this.field('content');
+                        this.field('date');
+
+                        documents.forEach(function (doc) {
+                            this.add(doc);
+                        }, this);
+                    });
+                    console.log('Lunr.js index built successfully.');
+                })
+                .catch(error => {
+                    console.error('Error fetching search index:', error);
+                    searchResultsContainer.innerHTML = '<li>Error loading search data.</li>';
+                });
+
+            searchInput.addEventListener('keyup', function() {
+                const query = this.value;
+                searchResultsContainer.innerHTML = ''; // Clear previous results
+
+                if (query.length > 2 && idx) { // Only search if query is at least 3 characters
+                    const results = idx.search(query);
+                    if (results.length > 0) {
+                        results.forEach(result => {
+                            const doc = documents.find(d => d.url === result.ref);
+                            if (doc) {
+                                const listItem = document.createElement('li');
+                                listItem.innerHTML = `
+                                    <a href="${doc.url}">${doc.title}</a>
+                                    <p>${doc.date}</p>
+                                `;
+                                searchResultsContainer.appendChild(listItem);
+                            }
+                        });
+                    } else {
+                        searchResultsContainer.innerHTML = '<li>No results found.</li>';
+                    }
+                } else if (query.length <= 2 && searchResultsContainer.innerHTML) {
+                    searchResultsContainer.innerHTML = ''; // Clear if query too short
+                }
+            });
+        });
+    </script>
 </body>
 </html>

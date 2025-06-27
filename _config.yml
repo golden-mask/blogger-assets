@@ -22,3 +22,13 @@ exclude:
   - vendor/cache/
   - vendor/gems/
   - vendor/ruby/
+  # For search functionality with Lunr.js
+collections:
+  posts:
+    output: true
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      search_exclude: false # Include all posts in search by default

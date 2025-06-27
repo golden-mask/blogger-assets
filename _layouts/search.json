@@ -1,0 +1,16 @@
+---
+layout: null # This layout doesn't use a parent layout
+permalink: /search.json # The URL where the JSON will be accessible
+---
+[
+  {% for post in site.posts %}
+    {% unless post.search_exclude %}
+      {
+        "title"    : {{ post.title | jsonify }},
+        "url"      : {{ post.url | relative_url | jsonify }},
+        "date"     : "{{ post.date | date: "%Y-%m-%d" }}",
+        "content"  : {{ post.content | strip_html | strip_newlines | replace: '.', '. ' | replace: ':', ': ' | replace: '!', '! ' | replace: '?', '? ' | remove: '  ' | jsonify }}
+      }{% unless forloop.last %},{% endunless %}
+    {% endunless %}
+  {% endfor %}
+]
