@@ -126,56 +126,6 @@ header p {
     margin: 5px 0 0 0;
 }
 
-/* Responsive Adjustments for search */
-@media (max-width: 768px) {
-    header h1 {
-        font-size: 2em; /* Smaller title on mobile */
-        text-align: center; /* Center title on small screens */
-        flex-grow: 0; /* Don't grow, allow search to be below */
-    }
-    .search-container {
-        margin-left: 0;
-        margin-top: 15px; /* Space between title and search */
-        justify-content: center; /* Center search on small screens */
-        width: 100%;
-    }
-    #search-input.active {
-        width: calc(100% - 60px); /* Adjust width to fit */
-    }
-    /* Make the header content stack vertically on small screens */
-    header > div {
-        flex-direction: column;
-    }
-}
-/* Header Styles */
-header {
-    text-align: center;
-    margin-bottom: 40px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid #eee; /* Separator line */
-}
-
-header h1 {
-    font-size: 2.8em;
-    margin-bottom: 10px;
-    font-weight: 700; /* Bold title */
-}
-
-header h1 a {
-    text-decoration: none;
-    color: #333; /* Darker color for title link */
-    transition: color 0.3s ease;
-}
-
-header h1 a:hover {
-    color: #007bff; /* Primary blue on hover */
-}
-
-header p {
-    font-size: 1.1em;
-    color: #666;
-}
-
 /* Post List (Homepage) */
 .post-preview {
     margin-bottom: 30px;
@@ -487,9 +437,6 @@ footer {
         padding: 20px;
         margin: 10px;
     }
-    header h1 {
-        font-size: 2.2em;
-    }
     .post-preview h2 {
         font-size: 1.6em;
     }
@@ -522,4 +469,24 @@ footer {
     .last-updated-time, .picsum-attribution {
         font-size: 0.6em;
     }
+    
+    header h1 {
+        font-size: 2em; /* Smaller title on mobile */
+        text-align: center; /* Center title on small screens */
+        flex-grow: 0; /* Don't grow, allow search to be below */
+    }
+    .search-container {
+        margin-left: 0;
+        margin-top: 15px; /* Space between title and search */
+        justify-content: center; /* Center search on small screens */
+        width: 100%;
+    }
+    #search-input.active {
+        width: calc(100% - 60px); /* Adjust width to fit */
+    }
+    /* Make the header content stack vertically on small screens */
+    header > div {
+        flex-direction: column;
+    }
+
 }
