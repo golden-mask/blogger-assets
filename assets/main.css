@@ -7,10 +7,9 @@ body {
     margin: 0;
     padding: 20px;
     display: flex;
-    justify-content: center;
-    min-height: 100vh; /* Full viewport height */
-    display: flex;
-    align-items: center;
+    flex-direction: column; /* THIS IS THE FIX: Stack children vertically */
+    align-items: center;   /* Center content horizontally within the column */
+    min-height: 100vh;
 }
 
 /* Container for content */
