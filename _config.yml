@@ -1,5 +1,5 @@
-title: My Blogger Posts
-description: A static site generated from Blogger posts.
+title: TechBaytk
+description: All what u need to know about tech news and tweaks and other info. TechBaytk is you home for technology.
 baseurl: "" # The subpath of your site, e.g. /blog
 url: "https://golden-mask.github.io" # the base hostname & protocol for your site
 
@@ -32,3 +32,6 @@ defaults:
       type: "posts"
     values:
       search_exclude: false # Include all posts in search by default
+
+# Excerpt configuration for post descriptions
+excerpt_separator: <!-- more --> # Use this in your Blogger posts to define excerpt
