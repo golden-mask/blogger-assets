@@ -150,7 +150,7 @@ def convert_post_to_markdown(post):
         'url': post.get('url')
     }
     
-    # !!! USE THE NEW create_slug FUNCTION HERE !!!
+
     slug = create_slug(title) 
 
     filename = f"{post_date_filename}-{slug}.md" # Filename is now just the cleaned title
