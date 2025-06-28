@@ -6,7 +6,7 @@ title: Welcome to techbaytk Blog
 <section class="posts-list-section">
   <h2>Latest Posts</h2>
   <div class="posts-list-container">
-    {% assign latest_posts = site.posts | sort: "date" | reverse | limit: 5 %} {# Get latest 5 posts #}
+    {% assign latest_posts = site.posts | sort: "date" | reverse | limit: 5 %} 
     {% if latest_posts.size > 0 %}
       {% for post in latest_posts %}
         <div class="post-item-card">
