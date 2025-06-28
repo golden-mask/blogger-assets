@@ -254,10 +254,9 @@ footer {
 .post-item-date-bookmark {
   background-color: #007bff; /* Primary blue for bookmark */
   color: white;
-  padding: 8px 12px;
+  padding: 15px 8px;
   font-size: 0.8em;
   font-weight: bold;
-  border-bottom-left-radius: 10px; /* Rounded corner at bottom left */
   clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 50% 80%, 0% 100%); /* Bookmark shape */
   transform: translateY(-10px); /* Move slightly up to create bookmark effect */
   z-index: 10; /* Ensure it's above other content */

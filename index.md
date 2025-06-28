@@ -13,17 +13,25 @@ title: Welcome to techbaytk Blog
           <div class="post-item-header">
             <h3 class="post-item-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
             <div class="post-item-date-bookmark">
-              {{ post.date | date: "%b %d, %Y" }} {# e.g., Jun 28, 2025 #}
+            <div class="year">
+              {{ post.date | date: "%Y" }}
+            </div>
+            <div class="day">
+              {{ post.date | date: "%d" }}
+            </div>
+            <div class="month">
+              {{ post.date | date: "%b" }}
             </div>
           </div>
+         </div> 
           <div class="post-item-body">
             <div class="post-item-image" style="background-image: url('{{ post.featured_image | default: 'https://placehold.co/400x250/e0e0e0/333333?text=No+Image' }}');"></div>
-            <p class="post-item-description">{{ post.excerpt | strip_html | strip_newlines | truncatewords: 30 }}</p> {# Truncate description #}
+            <p class="post-item-description">{{ post.excerpt | strip_html | strip_newlines | truncatewords: 30 }}</p> 
           </div>
           <div class="post-item-footer">
             <div class="post-item-tags">
               {% if post.tags.size > 0 %}
-                {% for tag in post.tags limit: 3 %} {# Limit tags to 3 for brevity #}
+                {% for tag in post.tags limit: 3 %} 
                   <span class="post-item-tag-item">{{ tag }}</span>
                 {% endfor %}
               {% else %}
