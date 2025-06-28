@@ -1,6 +1,8 @@
 ---
 author: Techbayt بيت التقنية
 date: '2025-06-23T00:33:00.001000+03:00'
+featured_image: https://blogger.googleusercontent.com/img/a/AVvXsEhwr7vOxVSu2n9pgAlOBNKj4sQbHNVNXWO_H8mQowcj0OksgCIuU2biqmYsydZd6WKMl4xIbjfS3XWnHYK_mtai8gHRoa048CycL_Zdw3wmB50qUXWM9984-2NMC59PBvI1HgbFGhktqPazplLmq-ToRf4SQ4xDF-1OnLAfnmPOX2M0H0U634FTh1P_QTc
+layout: post
 tags:
 - learn
 - network

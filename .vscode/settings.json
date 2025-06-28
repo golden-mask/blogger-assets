@@ -1,6 +1,7 @@
 {
-    "files.associations": {
-        "_layouts/search.json": "liquid" // Treat search.json as a Liquid template, not pure JSON
-    },
-    "json.schemas": [] // You might need to clear or adjust this if you have other JSON schema settings
+"files.associations": {
+    "_layouts/search.json": "liquid", // Treat search.json as a Liquid template, not pure JSON
+    "_layouts/carousel_data.json": "liquid"
+},
+"json.schemas": [] // You might need to clear or adjust this if you have other JSON schema settings
 }

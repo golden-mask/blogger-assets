@@ -4,13 +4,11 @@ import json
 import html2text
 import yaml
 from datetime import datetime
-import re # Add this import for regular expressions
+import re
+from bs4 import BeautifulSoup # NEW: Import BeautifulSoup for HTML parsing
 
 # --- Configuration ---
 BLOGGER_FEED_URL = 'https://techbaytk.blogspot.com/feeds/posts/default?alt=json-in-script&max-results=500'
-
-# Set OUTPUT_DIR to the actual path of your _posts folder inside your Git repository.
-# Example: If your script is in the root of golden-mask.github.io, you can use:
 OUTPUT_DIR = '_posts' 
 
 # Initialize html2text for HTML to Markdown conversion
@@ -24,6 +22,22 @@ h.links_each_on_own_line = False
 h.strong_mark = '**' 
 h.emphasis_mark = '*' 
 
+# --- NEW HELPER FUNCTION TO EXTRACT FIRST IMAGE URL ---
+def extract_first_image_url(html_content):
+    """
+    Parses HTML content to find the source URL of the first <img> tag.
+    Returns a placeholder image URL if no image is found.
+    """
+    if not html_content:
+        return 'https://placehold.co/400x250/e0e0e0/333333?text=No+Image'
+
+    soup = BeautifulSoup(html_content, 'html.parser')
+    first_img = soup.find('img')
+    if first_img and first_img.get('src'):
+        return first_img['src']
+    
+    return 'https://placehold.co/400x250/e0e0e0/333333?text=No+Image' # Placeholder if no image
+
 # --- NEW HELPER FUNCTION FOR SLUGIFICATION ---
 def create_slug(text, max_length=60):
     """
@@ -31,37 +45,23 @@ def create_slug(text, max_length=60):
     Allows alphanumeric, spaces, hyphens, and underscores.
     Replaces spaces/problematic chars with hyphens.
     """
-    # 1. Convert to lowercase
     text = text.lower()
-    
-    # 2. Replace non-alphanumeric characters (except spaces, hyphens, underscores) with empty string
-    # This keeps letters, numbers, spaces, hyphens, and underscores.
-    # If you want to allow more characters, modify this regex.
-    # For example, to allow periods, add \. to the character set: r'[^\w\s-.]'
-    text = re.sub(r'[^\w\s-]', '', text) # \w includes alphanumeric and underscore
-
-    # 3. Replace spaces with hyphens
+    text = re.sub(r'[^\w\s-]', '', text)
     text = text.replace(' ', '-')
-    
-    # 4. Remove multiple consecutive hyphens
     text = re.sub(r'-+', '-', text)
-    
-    # 5. Strip leading/trailing hyphens
     text = text.strip('-')
 
-    # 6. Truncate to max_length if specified, to avoid extremely long filenames
     if max_length and len(text) > max_length:
-        text = text[:max_length].rsplit('-', 1)[0] # Cut at last hyphen before max_length
-        if not text: # Fallback if truncation makes it empty
+        text = text[:max_length].rsplit('-', 1)[0]
+        if not text:
             text = text[:max_length]
     
-    # Ensure it's not empty, fallback to a timestamp slug
     if not text:
         text = f"post-{datetime.now().strftime('%Y%m%d%H%M%S')}"
 
     return text
 
-# --- REST OF THE SCRIPT (Mostly unchanged) ---
+# --- REST OF THE SCRIPT ---
 
 def fetch_posts_from_feed(feed_url):
     """Fetches posts from the Blogger Atom feed as JSON."""
@@ -89,7 +89,7 @@ def fetch_posts_from_feed(feed_url):
             post['published'] = entry.get('published', {}).get('$t')
             post['updated'] = entry.get('updated', {}).get('$t')
 
-            post['content'] = entry.get('content', {}).get('$t', '')
+            post['content'] = entry.get('content', {}).get('$t', '') # Keep full HTML content here
 
             for link in entry.get('link', []):
                 if link.get('rel') == 'alternate':
@@ -120,9 +120,8 @@ def fetch_posts_from_feed(feed_url):
 
 def convert_post_to_markdown(post):
     """Converts a Blogger post data to Markdown with YAML front matter."""
-    title = post.get('title', 'No Title') # Keep original title for slugging
+    title = post.get('title', 'No Title')
 
-    # Use the published date for the filename and YAML front matter date
     published_date_str = post.get('published')
     if published_date_str:
         try:
@@ -139,21 +138,30 @@ def convert_post_to_markdown(post):
         post_date_filename = now.strftime('%Y-%m-%d')
         post_date_yaml = now.isoformat()
 
+    # Extract featured image URL
+    featured_image_url = extract_first_image_url(post.get('content', ''))
+
     html_content = post.get('content', '')
+    # Use only a part of the content for excerpt if it's not explicitly defined by <!-- more -->
+    # For full control, ensure you define <!-- more --> in your Blogger posts.
+    # Otherwise, Liquid's post.excerpt will grab the first paragraph.
     markdown_content = h.handle(html_content)
 
+
     front_matter = {
-        'title': title, # Use original title here for display
+        'layout': 'post', # Ensure this is 'post' for your post layout
+        'title': title,
         'date': post_date_yaml,
         'author': post.get('author', 'Unknown'),
         'tags': [tag.lower() for tag in post.get('labels', []) if tag],
-        'url': post.get('url')
+        'url': post.get('url'),
+        'featured_image': featured_image_url # NEW: Add featured image to front matter
     }
     
-
     slug = create_slug(title) 
 
-    filename = f"{post_date_filename}-{slug}.md" # Filename is now just the cleaned title
+    # Keep Jekyll's required date prefix for filenames
+    filename = f"{post_date_filename}-{slug}.md" 
 
     full_content = f"---\n{yaml.safe_dump(front_matter, allow_unicode=True, default_flow_style=False)}---\n\n{markdown_content}"
     return filename, full_content
@@ -186,4 +194,6 @@ def main():
     print("Blogger posts synced successfully to Markdown!")
 
 if __name__ == '__main__':
+    # Make sure to pip install beautifulsoup4
+    # pip install beautifulsoup4
     main()

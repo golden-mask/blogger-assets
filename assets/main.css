@@ -1,270 +1,752 @@
 /* General Body Styles */
 body {
-    font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif; /* Modern sans-serif font */
-    line-height: 1.6;
-    color: #333;
-    background-color: #f8f8f8; /* Light gray background */
-    margin: 0;
-    padding: 10px;
-    display: flex;
-    flex-direction: column; /* THIS IS THE FIX: Stack children vertically */
-    align-items: center;   /* Center content horizontally within the column */
-    min-height: 100vh;
+  font-family: "Inter", "Helvetica Neue", Arial, sans-serif; /* Modern sans-serif font */
+  line-height: 1.6;
+  color: #333;
+  background-color: #f8f8f8; /* Light gray background */
+  margin: 0;
+  padding: 10px;
+  display: flex;
+  flex-direction: column; /* THIS IS THE FIX: Stack children vertically */
+  align-items: center; /* Center content horizontally within the column */
+  min-height: 100vh;
 }
 
 /* Container for content */
 main {
-    max-width: 1200px; /* Limit content width for readability */
-    width: 100%;
-    background-color: #fff;
-    padding: 40px;
-    border-radius: 8px; /* Slightly rounded corners */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08); /* Subtle shadow */
-    box-sizing: border-box; /* Include padding in width */
-    margin-bottom: 20px; /* Space above footer */
+  max-width: 1200px; /* Limit content width for readability */
+  width: 100%;
+  background-color: #fff;
+  padding: 40px;
+  border-radius: 8px; /* Slightly rounded corners */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08); /* Subtle shadow */
+  box-sizing: border-box; /* Include padding in width */
+  margin-bottom: 20px; /* Space above footer */
 }
 /* Header Styles - ensure the flexbox for spacing */
 header {
-    text-align: center;
-    margin-bottom: 40px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid #eee;
-    width: 100%;
-    max-width: 1200px; /* Match main content width */
-    text-align: center;
-    box-sizing: border-box;
+  text-align: center;
+  margin-bottom: 40px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #eee;
+  width: 100%;
+  max-width: 1200px; /* Match main content width */
+  text-align: center;
+  box-sizing: border-box;
 }
 
 /* Adjust header h1 to be left-aligned within its flex container */
 header h1 {
-    font-size: 2.8em;
-    margin-bottom: 10px; /* Keep some margin for description below */
-    font-weight: 700;
-    text-align: left; /* Align title to the left */
-    flex-grow: 1; /* Allow title to take up available space */
+  font-size: 2.8em;
+  margin-bottom: 10px; /* Keep some margin for description below */
+  font-weight: 700;
+  text-align: left; /* Align title to the left */
+  flex-grow: 1; /* Allow title to take up available space */
 }
 
 header h1 a {
-    text-decoration: none;
-    color: #333;
-    transition: color 0.3s ease;
+  text-decoration: none;
+  color: #333;
+  transition: color 0.3s ease;
 }
 
 header h1 a:hover {
-    color: #007bff;
+  color: #007bff;
 }
 
 /* Ensure description is centered below the main header section */
 header p {
-    font-size: 1.1em;
-    color: #666;
-    margin-top: 10px; /* Space from header line */
-    text-align: center;
+  font-size: 1.1em;
+  color: #666;
+  margin-top: 10px; /* Space from header line */
+  text-align: center;
 }
 
 /* Search Input and Icon */
 .search-container {
-    position: relative;
-    display: flex; /* Use flex to align input and icon */
-    align-items: center;
-    margin-left: 20px; /* Space from title */
+  position: relative;
+  display: flex; /* Use flex to align input and icon */
+  align-items: center;
+  margin-left: 20px; /* Space from title */
 }
 
 #search-input {
-    padding: 8px 12px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 1em;
-    width: 0; /* Hidden initially */
-    opacity: 0;
-    transition: width 0.3s ease, opacity 0.3s ease;
-    vertical-align: middle;
-    overflow: hidden; /* Hide overflow during transition */
-    box-sizing: border-box; /* Include padding in width */
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1em;
+  width: 0; /* Hidden initially */
+  opacity: 0;
+  transition: width 0.3s ease, opacity 0.3s ease;
+  vertical-align: middle;
+  overflow: hidden; /* Hide overflow during transition */
+  box-sizing: border-box; /* Include padding in width */
 }
 
 #search-input.active {
-    width: 200px; /* Expand when active */
-    opacity: 1;
+  width: 200px; /* Expand when active */
+  opacity: 1;
 }
 
 .search-icon-svg {
-    width: 24px;
-    height: 24px;
-    fill: #007bff; /* Primary blue for the icon */
-    cursor: pointer;
-    vertical-align: middle;
-    margin-left: 10px; /* Space between input (when active) and icon */
-    flex-shrink: 0; /* Prevent icon from shrinking */
+  width: 24px;
+  height: 24px;
+  fill: #007bff; /* Primary blue for the icon */
+  cursor: pointer;
+  vertical-align: middle;
+  margin-left: 10px; /* Space between input (when active) and icon */
+  flex-shrink: 0; /* Prevent icon from shrinking */
 }
 
 /* Search Results Styling */
 #search-results {
-    list-style: none;
-    padding: 0;
-    margin: 20px 0 0 0; /* Space above results */
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    max-height: 400px; /* Limit height of results */
-    overflow-y: auto; /* Enable scrolling if many results */
-    width: 100%; /* Take full width of main container */
-    box-sizing: border-box;
-    border: 1px solid #eee; /* Light border */
+  list-style: none;
+  padding: 0;
+  margin: 20px 0 0 0; /* Space above results */
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  max-height: 400px; /* Limit height of results */
+  overflow-y: auto; /* Enable scrolling if many results */
+  width: 100%; /* Take full width of main container */
+  box-sizing: border-box;
+  border: 1px solid #eee; /* Light border */
 }
 #search-results li {
-    padding: 10px 15px;
-    border-bottom: 1px solid #eee;
+  padding: 10px 15px;
+  border-bottom: 1px solid #eee;
 }
 #search-results li:last-child {
-    border-bottom: none;
+  border-bottom: none;
 }
 #search-results li a {
-    text-decoration: none;
-    color: #007bff;
-    font-weight: bold;
-    display: block; /* Make the whole area clickable */
+  text-decoration: none;
+  color: #007bff;
+  font-weight: bold;
+  display: block; /* Make the whole area clickable */
 }
 #search-results li p {
-    font-size: 0.9em;
-    color: #555;
-    margin: 5px 0 0 0;
+  font-size: 0.9em;
+  color: #555;
+  margin: 5px 0 0 0;
 }
 
 /* Post List (Homepage) */
 .post-preview {
-    margin-bottom: 30px;
-    padding-bottom: 20px;
-    border-bottom: 1px dashed #eee; /* Dashed separator */
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 1px dashed #eee; /* Dashed separator */
 }
 
 .post-preview:last-of-type {
-    border-bottom: none; /* No border for the last item */
+  border-bottom: none; /* No border for the last item */
 }
 
 .post-preview h2 {
-    font-size: 2em;
-    margin-bottom: 8px;
+  font-size: 2em;
+  margin-bottom: 8px;
 }
 
 .post-preview h2 a {
-    text-decoration: none;
-    color: #333;
-    transition: color 0.3s ease;
+  text-decoration: none;
+  color: #333;
+  transition: color 0.3s ease;
 }
 
 .post-preview h2 a:hover {
-    color: #007bff;
+  color: #007bff;
 }
 
 .post-preview p {
-    color: #555;
-    margin-top: 5px;
-    font-size: 0.95em;
+  color: #555;
+  margin-top: 5px;
+  font-size: 0.95em;
 }
 
 .post-preview time {
-    font-size: 0.9em;
-    color: #888;
+  font-size: 0.9em;
+  color: #888;
 }
 
 /* Individual Post Styles */
 article h1 {
-    font-size: 2.5em;
-    margin-bottom: 15px;
-    color: #333;
-    text-align: center;
+  font-size: 2.5em;
+  margin-bottom: 15px;
+  color: #333;
+  text-align: center;
 }
 
 article time {
-    display: block; /* Make time take its own line */
-    text-align: center;
-    font-size: 0.9em;
-    color: #888;
-    margin-bottom: 30px;
+  display: block; /* Make time take its own line */
+  text-align: center;
+  font-size: 0.9em;
+  color: #888;
+  margin-bottom: 30px;
 }
 
-.content h1, .content h2, .content h3, .content h4, .content h5, .content h6 {
-    margin-top: 1.5em;
-    margin-bottom: 0.5em;
-    color: #333;
+.content h1,
+.content h2,
+.content h3,
+.content h4,
+.content h5,
+.content h6 {
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+  color: #333;
 }
 
 .content p {
-    margin-bottom: 1em;
+  margin-bottom: 1em;
 }
 
 .content img {
-    max-width: 100%; /* Ensure images don't overflow */
-    height: auto;
-    display: block; /* Remove extra space below images */
-    margin: 20px auto; /* Center images and add vertical space */
-    border-radius: 4px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  max-width: 100%; /* Ensure images don't overflow */
+  height: auto;
+  display: block; /* Remove extra space below images */
+  margin: 20px auto; /* Center images and add vertical space */
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .content a {
-    color: #007bff;
-    text-decoration: none;
-    border-bottom: 1px dotted #007bff; /* Dotted underline for links */
-    transition: border-bottom 0.3s ease;
+  color: #007bff;
+  text-decoration: none;
+  border-bottom: 1px dotted #007bff; /* Dotted underline for links */
+  transition: border-bottom 0.3s ease;
 }
 
 .content a:hover {
-    border-bottom-style: solid; /* Solid underline on hover */
+  border-bottom-style: solid; /* Solid underline on hover */
 }
 
 /* Footer Styles */
 footer {
-    width: 100%; /* Ensure footer takes full width of body align-items: center */
-    max-width: 1200px; /* Match main content width */
-    text-align: center;
-    margin-top: 40px;
-    padding-top: 20px;
-    border-top: 1px solid #eee;
-    font-size: 0.9em;
-    color: #777;
-    box-sizing: border-box;
+  width: 100%; /* Ensure footer takes full width of body align-items: center */
+  max-width: 1200px; /* Match main content width */
+  text-align: center;
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid #eee;
+  font-size: 0.9em;
+  color: #777;
+  box-sizing: border-box;
 }
-
 
 /* --- Carousel Section Styling --- */
 .carousel-section {
-    margin-top: 40px;
-    text-align: center;
+  margin-top: 40px;
+  text-align: center;
 }
 
 .carousel-section h2 {
-    font-size: 2.5em;
-    color: #333;
-    margin-bottom: 30px;
-    text-align: left;
+  font-size: 2.5em;
+  color: #333;
+  margin-bottom: 30px;
+  text-align: left;
 }
 
 .carousel-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    overflow: hidden; /* Important to hide cards outside view */
-    position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  overflow: hidden; /* Important to hide cards outside view */
+  position: relative;
 }
 
 .carousel-track-container {
-    flex-grow: 1; /* Allows track to fill space */
-    overflow: hidden; /* Hides cards outside its view */
+  flex-grow: 1; /* Allows track to fill space */
+  overflow: hidden; /* Hides cards outside its view */
 }
 
 .carousel-track {
-    display: flex;
-    transition: transform 0.5s ease-in-out; /* Smooth scrolling effect */
-    padding-bottom: 10px; /* Space for shadow */
+  display: flex;
+  transition: transform 0.5s ease-in-out; /* Smooth scrolling effect */
+  padding-bottom: 10px; /* Space for shadow */
 }
 
 .post-card {
-    flex: 0 0 auto; /* Prevent cards from shrinking/growing */
-    width: 300px; /* Fixed width for each card */
-    margin-right: 20px; /* Space between cards */
+  flex: 0 0 auto; /* Prevent cards from shrinking/growing */
+  width: 300px; /* Fixed width for each card */
+  margin-right: 20px; /* Space between cards */
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 400px; /* Minimum height for cards */
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.post-card:last-child {
+  margin-right: 0; /* No margin on the last card */
+}
+
+.post-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.card-image-bg {
+  width: 100%;
+  padding-top: 60%; /* Aspect ratio 16:9 for image area */
+  background-size: cover;
+  background-position: center;
+  background-color: #e0e0e0; /* Fallback background */
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  flex-shrink: 0; /* Don't allow image to shrink */
+}
+
+.card-content {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1; /* Allow content to grow */
+  position: relative; /* For date bookmark positioning */
+  text-align: left;
+}
+
+.card-date-bookmark {
+  position: absolute;
+  top: 0px; /* Adjusted position */
+  right: 0px; /* Adjusted position */
+  background-color: #007bff; /* Primary blue for bookmark */
+  color: white;
+  padding: 8px 12px;
+  font-size: 0.8em;
+  font-weight: bold;
+  border-bottom-left-radius: 10px; /* Rounded corner at bottom left */
+  clip-path: polygon(
+    0% 0%,
+    100% 0%,
+    100% 100%,
+    50% 80%,
+    0% 100%
+  ); /* Bookmark shape */
+  transform: translateY(-100%); /* Move up to overlap image area */
+  z-index: 10; /* Ensure it's above other content */
+  text-align: center;
+  padding-top: 15px; /* Adjust padding for shape */
+}
+
+.card-title {
+  font-size: 1.5em;
+  margin-top: 0; /* Remove default margin */
+  margin-bottom: 10px;
+  line-height: 1.3;
+}
+
+.card-title a {
+  text-decoration: none;
+  color: #333;
+  transition: color 0.3s ease;
+}
+
+.card-title a:hover {
+  color: #007bff;
+}
+
+.card-description {
+  font-size: 0.95em;
+  color: #555;
+  flex-grow: 1; /* Allow description to take space */
+  overflow: hidden; /* Hide overflowing text */
+  text-overflow: ellipsis; /* Add ellipsis if text overflows */
+  display: -webkit-box; /* For multiline ellipsis */
+  -webkit-line-clamp: 3; /* Limit to 3 lines */
+  -webkit-box-orient: vertical;
+}
+
+.card-tags {
+  margin-top: 15px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px; /* Space between tags */
+  font-size: 0.8em;
+}
+
+.card-tag-item {
+  background-color: #e9ecef;
+  color: #495057;
+  padding: 4px 8px;
+  border-radius: 5px;
+  white-space: nowrap; /* Prevent tags from breaking */
+}
+
+/* Show All Posts Button */
+.show-all-posts {
+  margin-top: 40px;
+  text-align: center;
+}
+
+.show-all-posts .button {
+  display: inline-block;
+  background-color: #28a745; /* Green button */
+  color: white;
+  padding: 12px 25px;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.show-all-posts .button:hover {
+  background-color: #218838;
+  transform: translateY(-2px);
+}
+
+/* Loading state for carousel */
+.loading-cards {
+  width: 100%;
+  text-align: center;
+  padding: 50px 0;
+  color: #888;
+  font-size: 1.2em;
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 1200px) {
+  main,
+  header,
+  footer {
+    max-width: 96%; /* Reduce max-width on smaller large screens */
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
+
+/* flip card style */
+
+/* Wrapper for the flip effect */
+.flip-container {
+  width: 350px; /* عرض البطاقة */
+  height: 450px; /* ارتفاع البطاقة */
+  perspective: 1000px; /* للتحكم في عمق تأثير 3D للقلب */
+  box-sizing: border-box;
+  transform-style: preserve-3d;
+}
+
+.flipper {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.6s cubic-bezier(0.455, 0.03, 0.515, 0.955); /* حركة قلب سلسة */
+  transform-origin: center center;
+}
+
+/* Apply transform to .flipper on .flip-container hover */
+.flip-container:hover .flipper {
+  transform: rotateY(180deg); /* تدوير 180 درجة على محور Y عند التمرير */
+}
+
+/* Front and Back of the card */
+.front-card,
+.back-card {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden; /* يخفي الوجه الخلفي عند عدم رؤيته */
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  display: flex; /* Flexbox for centering/layout */
+  flex-direction: column; /* Stack content vertically */
+  justify-content: center; /* Center content vertically */
+  align-items: center; /* Center content horizontally */
+  text-align: center;
+  color: white;
+  box-sizing: border-box;
+  transform-origin: center center;
+  padding: 30px; /* Add padding to the card content */
+}
+
+.front-card {
+  background: linear-gradient(
+    135deg,
+    #4a90e2 0%,
+    #63b8ff 100%
+  ); /* لون أزرق للواجهة الأمامية */
+  z-index: 2;
+}
+
+.back-card {
+  background: linear-gradient(
+    135deg,
+    #2c3e50 0%,
+    #34495e 100%
+  ); /* لون داكن للواجهة الخلفية */
+  transform: rotateY(180deg); /* الوجه الخلفي يبدأ مقلوبًا */
+  z-index: 1;
+  overflow: hidden; /* Hide overflowing background image */
+  background-size: cover; /* Cover the area with the image */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+}
+
+/* Overlay for the background image on the back side */
+.back-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0.5
+  ); /* Semi-transparent black overlay for text readability */
+  border-radius: 15px;
+  z-index: 0; /* Behind the text content */
+}
+
+/* --- Weather Front Card Specific Styles --- */
+.weather-icon-large {
+  position: absolute;
+  width: 180px; /* Larger size */
+  height: 180px;
+  opacity: 0.2; /* Transparent to be behind text */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Centered exactly */
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  z-index: 0; /* Behind the text */
+}
+
+.city-name {
+  font-size: 2.2em;
+  font-weight: bold;
+  margin-bottom: 10px;
+  position: relative; /* Ensure it's above the icon */
+  z-index: 1;
+}
+
+.temperature {
+  font-size: 4em;
+  font-weight: bold;
+  margin-bottom: 5px;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+  position: relative; /* Ensure it's above the icon */
+  z-index: 1;
+}
+
+.description {
+  font-size: 1.3em;
+  margin-bottom: 20px;
+  text-transform: capitalize;
+  position: relative; /* Ensure it's above the icon */
+  z-index: 1;
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-around;
+  font-size: 0.9em;
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+  padding-top: 15px;
+  margin-top: 20px;
+  width: 100%; /* Take full width */
+  position: relative; /* Ensure it's above the icon */
+  z-index: 1;
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.info-value {
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+.last-updated-time {
+  position: absolute;
+  bottom: 10px;
+  left: 15px;
+  font-size: 0.7em;
+  opacity: 0.7;
+  z-index: 1;
+}
+
+/* --- Quote Back Card Specific Styles --- */
+.quote-title {
+  font-size: 1.8em;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
+  width: 100%;
+  position: relative; /* Ensure it's above the overlay */
+  z-index: 1;
+}
+
+.quote-text {
+  font-size: 1.2em;
+  font-style: italic;
+  margin-bottom: 15px;
+  padding: 0 10px;
+  line-height: 1.5;
+  position: relative; /* Ensure it's above the overlay */
+  z-index: 1;
+}
+
+.quote-author {
+  font-size: 1em;
+  font-weight: bold;
+  text-align: center;
+  width: 100%;
+  opacity: 0.8;
+  position: relative; /* Ensure it's above the overlay */
+  z-index: 1;
+}
+
+.picsum-attribution {
+  position: absolute;
+  bottom: 10px;
+  left: 15px;
+  font-size: 0.6em;
+  opacity: 0.6;
+  color: rgba(255, 255, 255, 0.8);
+  z-index: 1;
+}
+
+/* Spinner and error styles */
+.loading-message,
+.error-message {
+  text-align: center;
+  font-size: 1.2em;
+  color: #fff;
+  margin-top: 20px;
+}
+
+.spinner {
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  border-top: 4px solid #fff;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  animation: spin 1s linear infinite;
+  margin: 20px auto;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  body {
+    padding: 10px;
+  }
+  main {
+    padding: 20px;
+    margin: 10px;
+  }
+  .post-preview h2 {
+    font-size: 1.6em;
+  }
+  article h1 {
+    font-size: 2em;
+  }
+  .flip-container {
+    width: 95%;
+    height: 400px;
+  }
+  .city-name {
+    font-size: 1.8em;
+  }
+  .temperature {
+    font-size: 3.5em;
+  }
+  .description {
+    font-size: 1.1em;
+  }
+  .weather-icon-large {
+    width: 140px;
+    height: 140px;
+  }
+  .quote-title {
+    font-size: 1.5em;
+  }
+  .quote-text {
+    font-size: 1em;
+  }
+  .last-updated-time,
+  .picsum-attribution {
+    font-size: 0.6em;
+  }
+
+  header h1 {
+    font-size: 2em; /* Smaller title on mobile */
+    text-align: center; /* Center title on small screens */
+    flex-grow: 0; /* Don't grow, allow search to be below */
+  }
+  .search-container {
+    margin-left: 0;
+    margin-top: 15px; /* Space between title and search */
+    justify-content: center; /* Center search on small screens */
+    width: 100%;
+  }
+  #search-input.active {
+    width: calc(100% - 60px); /* Adjust width to fit */
+  }
+  /* Make the header content stack vertically on small screens */
+  header > div {
+    flex-direction: column;
+  }
+  .card-title {
+    font-size: 1.3em;
+  }
+  .card-description {
+    font-size: 0.85em;
+  }
+  .card-date-bookmark {
+    font-size: 0.7em;
+    padding: 5px 8px;
+    padding-top: 10px;
+  }
+  .card-tags {
+    font-size: 0.75em;
+  }
+
+  /* --- Posts Grid Section Styling --- */
+  .latest-posts-grid-section {
+    margin-top: 40px;
+    text-align: center;
+  }
+
+  .latest-posts-grid-section h2 {
+    font-size: 2.5em;
+    color: #333;
+    margin-bottom: 30px;
+    text-align: left; /* Align section title to the left */
+  }
+
+  .posts-grid-container {
+    display: grid; /* Use CSS Grid for card layout */
+    grid-template-columns: repeat(
+      auto-fit,
+      minmax(300px, 1fr)
+    ); /* Responsive grid */
+    gap: 30px; /* Space between cards */
+    justify-content: center; /* Center cards in the grid if there are fewer than a full row */
+    align-items: stretch; /* Make all cards in a row have the same height */
+  }
+
+  .post-card {
     background-color: #fff;
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
@@ -275,18 +757,14 @@ footer {
     position: relative;
     cursor: pointer;
     transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-}
+  }
 
-.post-card:last-child {
-    margin-right: 0; /* No margin on the last card */
-}
-
-.post-card:hover {
+  .post-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-}
+  }
 
-.card-image-bg {
+  .card-image-bg {
     width: 100%;
     padding-top: 60%; /* Aspect ratio 16:9 for image area */
     background-size: cover;
@@ -295,18 +773,18 @@ footer {
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     flex-shrink: 0; /* Don't allow image to shrink */
-}
+  }
 
-.card-content {
+  .card-content {
     padding: 20px;
     display: flex;
     flex-direction: column;
     flex-grow: 1; /* Allow content to grow */
     position: relative; /* For date bookmark positioning */
     text-align: left;
-}
+  }
 
-.card-date-bookmark {
+  .card-date-bookmark {
     position: absolute;
     top: 0px; /* Adjusted position */
     right: 0px; /* Adjusted position */
@@ -316,31 +794,37 @@ footer {
     font-size: 0.8em;
     font-weight: bold;
     border-bottom-left-radius: 10px; /* Rounded corner at bottom left */
-    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 50% 80%, 0% 100%); /* Bookmark shape */
+    clip-path: polygon(
+      0% 0%,
+      100% 0%,
+      100% 100%,
+      50% 80%,
+      0% 100%
+    ); /* Bookmark shape */
     transform: translateY(-100%); /* Move up to overlap image area */
     z-index: 10; /* Ensure it's above other content */
     text-align: center;
     padding-top: 15px; /* Adjust padding for shape */
-}
+  }
 
-.card-title {
+  .card-title {
     font-size: 1.5em;
     margin-top: 0; /* Remove default margin */
     margin-bottom: 10px;
     line-height: 1.3;
-}
+  }
 
-.card-title a {
+  .card-title a {
     text-decoration: none;
     color: #333;
     transition: color 0.3s ease;
-}
+  }
 
-.card-title a:hover {
+  .card-title a:hover {
     color: #007bff;
-}
+  }
 
-.card-description {
+  .card-description {
     font-size: 0.95em;
     color: #555;
     flex-grow: 1; /* Allow description to take space */
@@ -349,54 +833,31 @@ footer {
     display: -webkit-box; /* For multiline ellipsis */
     -webkit-line-clamp: 3; /* Limit to 3 lines */
     -webkit-box-orient: vertical;
-}
+  }
 
-.card-tags {
+  .card-tags {
     margin-top: 15px;
     display: flex;
     flex-wrap: wrap;
     gap: 5px; /* Space between tags */
     font-size: 0.8em;
-}
+  }
 
-.card-tag-item {
+  .card-tag-item {
     background-color: #e9ecef;
     color: #495057;
     padding: 4px 8px;
     border-radius: 5px;
     white-space: nowrap; /* Prevent tags from breaking */
-}
+  }
 
-.carousel-nav-btn {
-    background-color: rgba(0, 123, 255, 0.8); /* Primary blue with transparency */
-    color: white;
-    border: none;
-    padding: 15px 10px;
-    cursor: pointer;
-    font-size: 1.5em;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-    z-index: 10;
-    margin: 0 10px; /* Space from carousel track */
-    flex-shrink: 0;
-}
-
-.carousel-nav-btn:hover {
-    background-color: #0056b3;
-}
-
-.carousel-nav-btn:disabled {
-    background-color: #cccccc;
-    cursor: not-allowed;
-}
-
-/* Show All Posts Button */
-.show-all-posts {
+  /* Show All Posts Button */
+  .show-all-posts {
     margin-top: 40px;
     text-align: center;
-}
+  }
 
-.show-all-posts .button {
+  .show-all-posts .button {
     display: inline-block;
     background-color: #28a745; /* Green button */
     color: white;
@@ -405,313 +866,39 @@ footer {
     border-radius: 8px;
     font-weight: bold;
     transition: background-color 0.3s ease, transform 0.2s ease;
-}
+  }
 
-.show-all-posts .button:hover {
+  .show-all-posts .button:hover {
     background-color: #218838;
     transform: translateY(-2px);
-}
+  }
 
-/* Loading state for carousel */
-.loading-cards {
-    width: 100%;
-    text-align: center;
-    padding: 50px 0;
-    color: #888;
-    font-size: 1.2em;
-}
-
-/* --- Responsive Adjustments --- */
-@media (max-width: 1200px) {
-    main, header, footer {
-        max-width: 96%; /* Reduce max-width on smaller large screens */
-        padding-left: 15px;
-        padding-right: 15px;
+  /* --- Responsive Adjustments --- */
+  @media (max-width: 1200px) {
+    main,
+    header,
+    footer {
+      max-width: 96%; /* Reduce max-width on smaller large screens */
+      padding-left: 15px;
+      padding-right: 15px;
     }
-}
+  }
 
-/* flip card style */
-
-/* Wrapper for the flip effect */
-.flip-container {
-    width: 350px; /* عرض البطاقة */
-    height: 450px; /* ارتفاع البطاقة */
-    perspective: 1000px; /* للتحكم في عمق تأثير 3D للقلب */
-    box-sizing: border-box;
-    transform-style: preserve-3d;
-}
-
-.flipper {
-    width: 100%;
-    height: 100%;
-    position: relative;
-    transform-style: preserve-3d;
-    transition: transform 0.6s cubic-bezier(0.455, 0.03, 0.515, 0.955); /* حركة قلب سلسة */
-    transform-origin: center center; 
-}
-
-/* Apply transform to .flipper on .flip-container hover */
-.flip-container:hover .flipper {
-    transform: rotateY(180deg); /* تدوير 180 درجة على محور Y عند التمرير */
-}
-
-/* Front and Back of the card */
-.front-card,
-.back-card {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    backface-visibility: hidden; /* يخفي الوجه الخلفي عند عدم رؤيته */
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    display: flex; /* Flexbox for centering/layout */
-    flex-direction: column; /* Stack content vertically */
-    justify-content: center; /* Center content vertically */
-    align-items: center; /* Center content horizontally */
-    text-align: center;
-    color: white;
-    box-sizing: border-box;
-    transform-origin: center center;
-    padding: 30px; /* Add padding to the card content */
-}
-
-.front-card {
-    background: linear-gradient(135deg, #4a90e2 0%, #63b8ff 100%); /* لون أزرق للواجهة الأمامية */
-    z-index: 2;
-}
-
-.back-card {
-    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%); /* لون داكن للواجهة الخلفية */
-    transform: rotateY(180deg); /* الوجه الخلفي يبدأ مقلوبًا */
-    z-index: 1; 
-    overflow: hidden; /* Hide overflowing background image */
-    background-size: cover; /* Cover the area with the image */
-    background-position: center; /* Center the image */
-    background-repeat: no-repeat; /* Do not repeat the image */
-}
-
-/* Overlay for the background image on the back side */
-.back-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay for text readability */
-    border-radius: 15px;
-    z-index: 0; /* Behind the text content */
-}
-
-/* --- Weather Front Card Specific Styles --- */
-.weather-icon-large {
-    position: absolute;
-    width: 180px; /* Larger size */
-    height: 180px;
-    opacity: 0.2; /* Transparent to be behind text */
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%); /* Centered exactly */
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    z-index: 0; /* Behind the text */
-}
-
-.city-name {
-    font-size: 2.2em;
-    font-weight: bold;
-    margin-bottom: 10px;
-    position: relative; /* Ensure it's above the icon */
-    z-index: 1;
-}
-
-.temperature {
-    font-size: 4em;
-    font-weight: bold;
-    margin-bottom: 5px;
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-    position: relative; /* Ensure it's above the icon */
-    z-index: 1;
-}
-
-.description {
-    font-size: 1.3em;
-    margin-bottom: 20px;
-    text-transform: capitalize;
-    position: relative; /* Ensure it's above the icon */
-    z-index: 1;
-}
-
-.info-row {
-    display: flex;
-    justify-content: space-around;
-    font-size: 0.9em;
-    border-top: 1px solid rgba(255, 255, 255, 0.3);
-    padding-top: 15px;
-    margin-top: 20px;
-    width: 100%; /* Take full width */
-    position: relative; /* Ensure it's above the icon */
-    z-index: 1;
-}
-
-.info-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.info-value {
-    font-weight: bold;
-    margin-top: 5px;
-}
-
-.last-updated-time {
-    position: absolute;
-    bottom: 10px;
-    left: 15px;
-    font-size: 0.7em;
-    opacity: 0.7;
-    z-index: 1;
-}
-
-/* --- Quote Back Card Specific Styles --- */
-.quote-title {
-    font-size: 1.8em;
-    font-weight: bold;
-    margin-bottom: 20px;
-    text-align: center;
-    width: 100%;
-    position: relative; /* Ensure it's above the overlay */
-    z-index: 1;
-}
-
-.quote-text {
-    font-size: 1.2em;
-    font-style: italic;
-    margin-bottom: 15px;
-    padding: 0 10px;
-    line-height: 1.5;
-    position: relative; /* Ensure it's above the overlay */
-    z-index: 1;
-}
-
-.quote-author {
-    font-size: 1em;
-    font-weight: bold;
-    text-align: center;
-    width: 100%;
-    opacity: 0.8;
-    position: relative; /* Ensure it's above the overlay */
-    z-index: 1;
-}
-
-.picsum-attribution {
-    position: absolute;
-    bottom: 10px;
-    left: 15px;
-    font-size: 0.6em;
-    opacity: 0.6;
-    color: rgba(255, 255, 255, 0.8);
-    z-index: 1;
-}
-
-/* Spinner and error styles */
-.loading-message, .error-message {
-    text-align: center;
-    font-size: 1.2em;
-    color: #fff;
-    margin-top: 20px;
-}
-
-.spinner {
-    border: 4px solid rgba(255, 255, 255, 0.3);
-    border-top: 4px solid #fff;
-    border-radius: 50%;
-    width: 30px;
-    height: 30px;
-    animation: spin 1s linear infinite;
-    margin: 20px auto;
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-/* Responsive Adjustments */
-@media (max-width: 768px) {
+  @media (max-width: 768px) {
     body {
-        padding: 10px;
+      padding: 10px;
     }
     main {
-        padding: 20px;
-        margin: 10px;
+      padding: 20px;
     }
-    .post-preview h2 {
-        font-size: 1.6em;
-    }
-    article h1 {
-        font-size: 2em;
-    }
-    .flip-container {
-        width: 95%; 
-        height: 400px; 
-    }
-    .city-name {
-        font-size: 1.8em;
-    }
-    .temperature {
-        font-size: 3.5em;
-    }
-    .description {
-        font-size: 1.1em;
-    }
-    .weather-icon-large {
-        width: 140px;
-        height: 140px;
-    }
-    .quote-title {
-        font-size: 1.5em;
-    }
-    .quote-text {
-        font-size: 1em;
-    }
-    .last-updated-time, .picsum-attribution {
-        font-size: 0.6em;
-    }
-    
     header h1 {
-        font-size: 2em; /* Smaller title on mobile */
-        text-align: center; /* Center title on small screens */
-        flex-grow: 0; /* Don't grow, allow search to be below */
+      font-size: 2em;
+      text-align: center;
+      margin-bottom: 5px;
     }
-    .search-container {
-        margin-left: 0;
-        margin-top: 15px; /* Space between title and search */
-        justify-content: center; /* Center search on small screens */
-        width: 100%;
-    }
-    #search-input.active {
-        width: calc(100% - 60px); /* Adjust width to fit */
-    }
-    /* Make the header content stack vertically on small screens */
     header > div {
-        flex-direction: column;
+      flex-direction: column;
+      align-items: center;
     }
-    .card-title {
-        font-size: 1.3em;
-    }
-    .card-description {
-        font-size: 0.85em;
-    }
-    .card-date-bookmark {
-        font-size: 0.7em;
-        padding: 5px 8px;
-        padding-top: 10px;
-    }
-    .card-tags {
-        font-size: 0.75em;
-    }
-
+  }
 }
