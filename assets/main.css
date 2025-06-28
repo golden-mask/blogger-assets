@@ -232,39 +232,6 @@ footer {
   box-sizing: border-box;
 }
 
-/* --- Carousel Section Styling --- */
-.carousel-section {
-  margin-top: 40px;
-  text-align: center;
-}
-
-.carousel-section h2 {
-  font-size: 2.5em;
-  color: #333;
-  margin-bottom: 30px;
-  text-align: left;
-}
-
-.carousel-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  overflow: hidden; /* Important to hide cards outside view */
-  position: relative;
-}
-
-.carousel-track-container {
-  flex-grow: 1; /* Allows track to fill space */
-  overflow: hidden; /* Hides cards outside its view */
-}
-
-.carousel-track {
-  display: flex;
-  transition: transform 0.5s ease-in-out; /* Smooth scrolling effect */
-  padding-bottom: 10px; /* Space for shadow */
-}
-
 .post-card {
   flex: 0 0 auto; /* Prevent cards from shrinking/growing */
   width: 300px; /* Fixed width for each card */
@@ -408,16 +375,6 @@ footer {
   font-size: 1.2em;
 }
 
-/* --- Responsive Adjustments --- */
-@media (max-width: 1200px) {
-  main,
-  header,
-  footer {
-    max-width: 96%; /* Reduce max-width on smaller large screens */
-    padding-left: 15px;
-    padding-right: 15px;
-  }
-}
 
 /* flip card style */
 
@@ -651,10 +608,7 @@ footer {
   body {
     padding: 10px;
   }
-  main {
-    padding: 20px;
-    margin: 10px;
-  }
+
   .post-preview h2 {
     font-size: 1.6em;
   }
@@ -689,11 +643,6 @@ footer {
     font-size: 0.6em;
   }
 
-  header h1 {
-    font-size: 2em; /* Smaller title on mobile */
-    text-align: center; /* Center title on small screens */
-    flex-grow: 0; /* Don't grow, allow search to be below */
-  }
   .search-container {
     margin-left: 0;
     margin-top: 15px; /* Space between title and search */
@@ -885,12 +834,7 @@ footer {
   }
 
   @media (max-width: 768px) {
-    body {
-      padding: 10px;
-    }
-    main {
-      padding: 20px;
-    }
+
     header h1 {
       font-size: 2em;
       text-align: center;
