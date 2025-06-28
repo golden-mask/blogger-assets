@@ -11,18 +11,7 @@ plugins:
   - jekyll-seo-tag # Good for SEO
   - jekyll-sitemap
 
-# Exclude from processing.
-# The following items will not be processed, by default.
-# For more information, please visit: https://jekyllrb.com/docs/configuration/#excluding-from-build
-exclude:
-  - Gemfile
-  - Gemfile.lock
-  - node_modules
-  - vendor/bundle/
-  - vendor/cache/
-  - vendor/gems/
-  - vendor/ruby/
-  # For search functionality with Lunr.js
+
 collections:
   posts:
     output: true
